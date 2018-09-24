@@ -1,15 +1,18 @@
-package com.mrxia.meditation;
+package com.mrxia.meditation.layout;
 
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.mrxia.meditation.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,38 +24,31 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //我这里用到了谷歌官方的一个工具叫Databinding，又不熟悉的可以自己去百度
         setContentView(R.layout.activity_main);
         fragments = new ArrayList<>();
         initView();
-    }
 
-    @Override
-    public void setTitle(CharSequence title) {
-        //设置标题
-        super.setTitle(title);
+        setHalfTransparent();
+        setFitSystemWindow(false);
     }
 
     /**
      * 创建视图
      */
     private void initView() {
-
-        //得到BottomNavigationBar控件
         BottomNavigationBar navigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
-        //设置BottomNavigationBar的模式，会在下面详细讲解
-        navigationBar.setMode(BottomNavigationBar.MODE_DEFAULT);
-        //设置BottomNavigationBar的背景风格，后面详细讲解
-        navigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
 
-        //我这里增加了3个Fragment
-        //BottomNavigationItem("底部导航ico","底部导航名字")
-        navigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "首页")
-                .setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "发现")
-                        .setActiveColorResource(R.color.colorPrimary))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "我的")
-                        .setActiveColorResource(R.color.colorPrimary))
+        navigationBar.setMode(BottomNavigationBar.MODE_FIXED);
+
+        navigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
+        navigationBar.setBarBackgroundColor(R.color.bottom_bar_blue);
+
+        navigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Home")
+                .setActiveColorResource(R.color.bottom_active_blue))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Music")
+                        .setActiveColorResource(R.color.bottom_active_blue))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Meditation")
+                        .setActiveColorResource(R.color.bottom_active_blue))
                 .setFirstSelectedPosition(0)//默认选择索引为0的菜单
                 .initialise();//对导航进行重绘
 
@@ -67,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private void setDefaultFragment() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.id_content, Fragment1.newInstance());
+        transaction.replace(R.id.id_content, HomeFragment.newInstance());
         transaction.commit();
     }
 
@@ -79,16 +75,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private List<Fragment> getFragments() {
 
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(Fragment1.newInstance());
-        fragments.add(Fragment2.newInstance());
-        fragments.add(Fragment3.newInstance());
+        fragments.add(HomeFragment.newInstance());
+        fragments.add(MusicFrament.newInstance());
+        fragments.add(MeditationFragment.newInstance());
         return fragments;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setTitle("测试Demo");
     }
 
     @Override
@@ -115,4 +105,37 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     public void onTabReselected(int position) {
 
     }
+
+    /**
+     * 半透明状态栏
+     */
+    protected void setHalfTransparent() {
+
+        if (Build.VERSION.SDK_INT >= 21) {//21表示5.0
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        } else if (Build.VERSION.SDK_INT >= 19) {//19表示4.4
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //虚拟键盘也透明
+            // getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+    }
+
+    /**
+     * 如果需要内容紧贴着StatusBar
+     * 应该在对应的xml布局文件中，设置根布局fitsSystemWindows=true。
+     */
+    private View contentViewGroup;
+
+    protected void setFitSystemWindow(boolean fitSystemWindow) {
+        if (contentViewGroup == null) {
+            contentViewGroup = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+        }
+        contentViewGroup.setFitsSystemWindows(fitSystemWindow);
+    }
+
+
 }

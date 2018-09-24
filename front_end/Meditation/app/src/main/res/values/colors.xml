@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="backgroundGray">#cabbc0</color>
+    <color name="transparent_background">#85d8d0d0</color>
+    <color name="bottom_bar_blue">#286e93</color>
+    <color name="bottom_active_blue">#1d526e</color>
+    <color name="bottom_inactive_grey">#9e9e9e</color>
+    <color name="theme_blue">#105978</color>
 </resources>
