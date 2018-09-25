@@ -2,12 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
+
     <ImageView
         android:id="@+id/home_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/forest"
-        android:scaleType="centerCrop"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/lake" />
 
     <TextView
         android:id="@+id/home_title"
@@ -16,24 +20,71 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="42dp"
         android:textSize="28sp"
-        android:textColor="@color/theme_blue"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"/>
 
-    <Button
-        android:id="@+id/notification_1"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent_background"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="128dp"/>
+    <ImageView
+        android:id="@+id/menu_1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/menu1"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="15dp"/>
 
-    <Button
-        android:id="@+id/notification_2"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:background="@color/transparent_background"
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/setting1"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="315dp"/>
+
+    <RelativeLayout
+        android:id="@+id/notification_1"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/notification_1"
-        android:layout_marginTop="32dp"/>
+        android:background="@drawable/layout_boarder">
+
+        <ImageView
+            android:id="@+id/imageview_1"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/think1"
+            android:paddingLeft="5dp"/>
+
+        <TextView
+            android:id="@+id/notification_title_1"
+            android:layout_width="218dp"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="3dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="80dp"
+            android:text="Hi this is meditation"
+            android:fontFamily="serif"
+            android:textColor="#f1eaea"
+            android:textSize="16sp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/notification_content_1"
+            android:layout_width="218dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="80dp"
+            android:textColor="#f1eaea"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp"
+            android:fontFamily="serif"
+            android:text="     just do something september 25 "
+            android:textSize="16sp"
+            />
+
+    </RelativeLayout>
 
 </RelativeLayout>
