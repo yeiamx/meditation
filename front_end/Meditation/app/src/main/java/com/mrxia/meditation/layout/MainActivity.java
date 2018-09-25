@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         navigationBar.setMode(BottomNavigationBar.MODE_FIXED);
 
         navigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
-        navigationBar.setBarBackgroundColor(R.color.bottom_bar_blue);
+        navigationBar.setBarBackgroundColor(R.color.transparent_background);
 
         navigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Home")
                 .setActiveColorResource(R.color.bottom_active_blue))
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         fragments = getFragments();
         setDefaultFragment();
         navigationBar.setTabSelectedListener(this);
+
     }
 
     /**
