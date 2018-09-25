@@ -18,7 +18,7 @@ public class HomeFragment extends Fragment {
     public static HomeFragment newInstance() {
         return new HomeFragment();
     }
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -31,7 +31,4 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
-
-
 }

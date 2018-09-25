@@ -86,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
         if (fragments != null) {
             if (position < fragments.size()) {
-
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
                 Fragment fragment = fragments.get(position);
