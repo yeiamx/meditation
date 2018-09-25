@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="Meditation" version="3.0">
+  <description>
+		backend support for Meditation
+	</description>
+  <context-param>
+    <param-name>webmaster</param-name>
+    <param-value>925166340@qq.com</param-value>
+  </context-param>
+  
+  <servlet>
+    <servlet-name>HomeNotificationServlet</servlet-name>
+    <servlet-class>com.flctxx.meditation.servlet.HomeNotificationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeNotificationServlet</servlet-name>
+    <url-pattern>/homeNotification</url-pattern>
+  </servlet-mapping>
+ 
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+</web-app>
