@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/login_username_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="203dp"
+        android:ems="10"
+        android:hint="用户名"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/login_password_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ems="10"
+        android:hint="密码"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="154dp"
+        android:background="@drawable/login_button"
+        android:text="登录"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="96dp"
+        android:layout_toStartOf="@+id/login_head_1"
+        android:layout_toLeftOf="@+id/login_head_1"
+        android:text="忘记密码" />
+
+    <TextView
+        android:id="@+id/sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/forget_password"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:text="注册" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/login_head_1"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="76dp"
+        android:src="@drawable/forest" />
+
+
+
+</RelativeLayout>
