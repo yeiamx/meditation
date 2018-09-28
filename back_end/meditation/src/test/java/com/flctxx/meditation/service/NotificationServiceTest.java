@@ -15,13 +15,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
 public class NotificationServiceTest extends AbstractTest{
-	private static NotificationService notificationService;
-	
-	@BeforeClass
-	public static void prepare() {
-		notificationService = new NotificationService();
-	}
-	
+	private static NotificationService notificationService = new NotificationService();
+
 	@Test
 	public void test1() {
 		String id = "0";

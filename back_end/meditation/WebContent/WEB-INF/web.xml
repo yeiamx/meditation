@@ -16,7 +16,25 @@
     <servlet-name>HomeNotificationServlet</servlet-name>
     <url-pattern>/homeNotification</url-pattern>
   </servlet-mapping>
- 
+  
+  
+  <servlet>
+    <servlet-name>updateUserInfoServlet</servlet-name>
+    <servlet-class>com.flctxx.meditation.servlet.UpdateUserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>updateUserInfoServlet</servlet-name>
+    <url-pattern>/updateUserInfo</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>getUserInfoServlet</servlet-name>
+    <servlet-class>com.flctxx.meditation.servlet.GetUserInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getUserInfoServlet</servlet-name>
+    <url-pattern>/getUserInfo</url-pattern>
+  </servlet-mapping>
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
