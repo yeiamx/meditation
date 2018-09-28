@@ -1,5 +1,6 @@
 package com.mrxia.meditation.layout;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,10 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 
 import java.util.ArrayList;
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(!MyApplication.isLogin){
+            Intent intent=new Intent(MainActivity.this,LoginActivity.class);   //Intent intent=new Intent(MainActivity.this,JumpToActivity.class);
+            startActivity(intent);
+        }
         fragments = new ArrayList<>();
         initView();
 
@@ -45,11 +50,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         navigationBar.setBarBackgroundColor(R.color.transparent_background);
 
         navigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Home")
-                .setActiveColorResource(R.color.bottom_active_blue))
+                .setActiveColorResource(R.color.bottom_active))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Music")
-                        .setActiveColorResource(R.color.bottom_active_blue))
+                        .setActiveColorResource(R.color.bottom_active))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Meditation")
-                        .setActiveColorResource(R.color.bottom_active_blue))
+                        .setActiveColorResource(R.color.bottom_active))
                 .setFirstSelectedPosition(0)//默认选择索引为0的菜单
                 .initialise();//对导航进行重绘
 
