@@ -5,10 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mrxia.meditation.R;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
+        setContentView(R.layout.login_activity);
     }
 }

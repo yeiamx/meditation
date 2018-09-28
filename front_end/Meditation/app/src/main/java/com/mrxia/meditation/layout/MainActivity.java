@@ -1,6 +1,5 @@
 package com.mrxia.meditation.layout;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if(!MyApplication.isLogin){
-            Intent intent=new Intent(MainActivity.this,Login.class);   //Intent intent=new Intent(MainActivity.this,JumpToActivity.class);
+            Intent intent=new Intent(MainActivity.this,LoginActivity.class);   //Intent intent=new Intent(MainActivity.this,JumpToActivity.class);
             startActivity(intent);
         }
         fragments = new ArrayList<>();
