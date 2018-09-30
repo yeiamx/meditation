@@ -21,5 +21,14 @@ public class UserService {
 		return dao.listFromDifferId(userId, ID_COLUMN_NAME, TABLE_NAME);
 	}
 	
+	public Boolean login(String username, String password){
+		List<UserInfo> list = dao.list("from "+TABLE_NAME);
+		for (int i=0; i<list.size(); i++){
+			if (username.equals(list.get(i).getUserName()) && password.equals(list.get(i).getPassword()))
+				return true;
+		}
+		return false;
+	}
+	
 	private static final Logger logger = Logger.getLogger(UserService.class);
 }

@@ -27,13 +27,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(!MyApplication.isLogin){
-            Intent intent=new Intent(MainActivity.this,LoginActivity.class);   //Intent intent=new Intent(MainActivity.this,JumpToActivity.class);
-            startActivity(intent);
-        }
         fragments = new ArrayList<>();
         initView();
-
         setHalfTransparent();
         setFitSystemWindow(false);
     }

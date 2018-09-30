@@ -2,7 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/register_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:textSize="28sp"
+        android:textColor="@color/theme_blue"
+        android:textStyle="bold" />
+
     <EditText
+        android:theme="@style/MyEditText"
         android:id="@+id/register_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,6 +25,7 @@
         android:hint="电子邮箱" />
 
     <EditText
+        android:theme="@style/MyEditText"
         android:id="@+id/register_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,6 +37,7 @@
         android:hint="用户名" />
 
     <EditText
+        android:theme="@style/MyEditText"
         android:id="@+id/register_password_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,6 +49,7 @@
         android:hint="密码" />
 
     <EditText
+        android:theme="@style/MyEditText"
         android:id="@+id/register_password_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

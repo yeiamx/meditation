@@ -7,7 +7,6 @@
     <param-name>webmaster</param-name>
     <param-value>925166340@qq.com</param-value>
   </context-param>
-  
   <servlet>
     <servlet-name>HomeNotificationServlet</servlet-name>
     <servlet-class>com.flctxx.meditation.servlet.HomeNotificationServlet</servlet-class>
@@ -16,8 +15,6 @@
     <servlet-name>HomeNotificationServlet</servlet-name>
     <url-pattern>/homeNotification</url-pattern>
   </servlet-mapping>
-  
-  
   <servlet>
     <servlet-name>updateUserInfoServlet</servlet-name>
     <servlet-class>com.flctxx.meditation.servlet.UpdateUserInfoServlet</servlet-class>
@@ -35,6 +32,17 @@
     <servlet-name>getUserInfoServlet</servlet-name>
     <url-pattern>/getUserInfo</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>loginServlet</servlet-name>
+    <servlet-class>com.flctxx.meditation.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>loginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

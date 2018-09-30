@@ -92,7 +92,7 @@ public class BaseDAO<T> {
         }
     }
     
-    public List<T> listFromId(String userId, String tableName) throws Exception{
+    public List<T> listFromId(String userId, String tableName) {
        Session session = SessionFactoryHelper.getSessionFactory().openSession();
        try{
 	        session.beginTransaction();
@@ -100,7 +100,7 @@ public class BaseDAO<T> {
 	        String hql = "from " + tableName+ " Where id=?";     
 	        Query q = session.createQuery(hql) ;     
 	        q.setString(0, userId);
-        return q.list();
+	        return q.list();
        } finally {
 	        session.getTransaction().commit();
 	        session.close();
