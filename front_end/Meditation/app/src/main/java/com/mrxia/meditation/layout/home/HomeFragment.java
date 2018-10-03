@@ -1,6 +1,5 @@
-package com.mrxia.meditation.layout;
+package com.mrxia.meditation.layout.home;
 
-import android.app.DownloadManager;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,24 +8,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.util.Log;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.mrxia.meditation.R;
-import com.mrxia.meditation.bean.Notification;
+import com.mrxia.meditation.layout.LoginActivity;
 import com.mrxia.meditation.utils.HttpUtil;
 
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 
