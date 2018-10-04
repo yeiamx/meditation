@@ -8,8 +8,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.List;
 
 public class MeditationFragmentAdapter extends FragmentStatePagerAdapter{
-    private List<Fragment> mFragments ;
-    private List<String> mTitles ;
+    private List<Fragment> mFragments;
+    private List<String> mTitles;
 
     public MeditationFragmentAdapter(FragmentManager fm,List<Fragment> fragments,List<String> titles) {
         super(fm);
