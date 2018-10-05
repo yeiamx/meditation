@@ -4,14 +4,20 @@ package com.mrxia.meditation.layout.meditation;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mrxia.meditation.R;
 
 public class ContentFragment extends Fragment {
+    private RecyclerView recyclerView;
+    private VerticalRecyclerAdapter adapter;
+
     public static ContentFragment newInstance() {
         ContentFragment frag = new ContentFragment();
         return frag;
@@ -32,6 +38,12 @@ public class ContentFragment extends Fragment {
     }
 
     public void initView(View view){
+        recyclerView = view.findViewById(R.id.meditation_ver_recyclerview);
+        adapter = new VerticalRecyclerAdapter(getActivity(), null);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
     }
 }

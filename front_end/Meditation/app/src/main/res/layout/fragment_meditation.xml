@@ -19,6 +19,7 @@
         android:layout_marginTop="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabMode="fixed"
         app:tabSelectedTextColor="@color/theme_blue"
         app:tabIndicatorColor="@color/theme_blue"
         app:tabTextColor="@color/blackGray">
@@ -29,7 +30,5 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-    
-
 
 </LinearLayout>
