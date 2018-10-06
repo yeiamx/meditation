@@ -1,5 +1,6 @@
 package com.mrxia.meditation.layout;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,10 +13,8 @@ import android.view.WindowManager;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
-import com.mrxia.meditation.layout.home.HomeFragment;
-import com.mrxia.meditation.layout.meditation.MeditationFragment;
-import com.mrxia.meditation.layout.music.MusicFrament;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     @Override
     public void onTabSelected(int position) {
+
         if (fragments != null) {
             if (position < fragments.size()) {
                 FragmentManager fm = getSupportFragmentManager();
