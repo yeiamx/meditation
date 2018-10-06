@@ -13,10 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mrxia.meditation.R;
+import com.mrxia.meditation.bean.Notification;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContentFragment extends Fragment {
     private RecyclerView recyclerView;
     private VerticalRecyclerAdapter adapter;
+    private List<Notification> data;
 
     public static ContentFragment newInstance() {
         ContentFragment frag = new ContentFragment();
@@ -28,18 +33,25 @@ public class ContentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // 1. 加载布局，第三个参数必须为`false`，否则会加载两次布局并且抛出异常！！
         View view = inflater.inflate(R.layout.fragment_meditation_content, container, false);
+        initData();
         initView(view);
         registerListener();
         return view;
     }
 
-    public void registerListener(){
+    private void initData(){
+        data = new ArrayList<>();
+        for (int i=0; i<10;i++) {
+            data.add(new Notification(null, String.valueOf(i), null, null));
+        }
+    }
 
+    public void registerListener(){
     }
 
     public void initView(View view){
         recyclerView = view.findViewById(R.id.meditation_ver_recyclerview);
-        adapter = new VerticalRecyclerAdapter(getActivity(), null);
+        adapter = new VerticalRecyclerAdapter(getActivity(), data);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
