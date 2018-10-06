@@ -10,4 +10,5 @@
     <color name="bottom_active">#669933</color>
     <color name="bottom_inactive">#cccc99</color>
     <color name="theme_blue">#105978</color>
+    <color name="white">#FFFFFF</color>
 </resources>

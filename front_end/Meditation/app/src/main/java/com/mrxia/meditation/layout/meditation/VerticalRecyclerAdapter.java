@@ -37,7 +37,7 @@ public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecycl
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return 3;
     }
 
     public void update(List<Notification> data){
@@ -86,14 +86,17 @@ public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecycl
         }
     }
     class HorizontalItemViewHolder extends RecyclerView.ViewHolder{
-        TextView textView;
+        TextView content;
+        TextView title;
         public HorizontalItemViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.test_text);
+            title = itemView.findViewById(R.id.meditation_noti_title);
+            content = itemView.findViewById(R.id.meditation_noti_content);
         }
 
         public void refreshData(List<Notification> data, int position){
-            textView.setText(data.get(position).getTitle());
+            title.setText(data.get(position).getTitle());
+            content.setText(data.get(position).getContent());
         }
     }
 }

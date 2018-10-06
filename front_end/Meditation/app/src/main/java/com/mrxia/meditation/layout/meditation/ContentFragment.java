@@ -42,7 +42,7 @@ public class ContentFragment extends Fragment {
     private void initData(){
         data = new ArrayList<>();
         for (int i=0; i<10;i++) {
-            data.add(new Notification(null, String.valueOf(i), null, null));
+            data.add(new Notification(null, String.valueOf(i), "testetestststeeset", null));
         }
     }
 
@@ -56,6 +56,16 @@ public class ContentFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        recyclerView.addItemDecoration(new SectionDecoration(getActivity(), new SectionDecoration.DecorationCallback() {
+            @Override
+            public long getGroupId(int position) {
+                return position;    //一行为一类
+            }
 
+            @Override
+            public String getGroupFirstLine(int position) {
+                return "类别"+String.valueOf(position);
+            }
+        }));
     }
 }
