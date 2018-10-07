@@ -4,6 +4,16 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/login_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:textSize="28sp"
+        android:textColor="@color/theme_blue"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/login_username_1"
         android:layout_width="wrap_content"
@@ -13,9 +23,11 @@
         android:layout_marginTop="203dp"
         android:ems="10"
         android:hint="用户名"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName"
+        android:theme="@style/MyEditText"/>
 
     <EditText
+        android:theme="@style/MyEditText"
         android:id="@+id/login_password_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,7 +37,7 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/login_button"
         android:layout_width="213dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -63,7 +75,7 @@
         android:layout_height="70dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="84dp"
         android:src="@drawable/forest" />
 
 

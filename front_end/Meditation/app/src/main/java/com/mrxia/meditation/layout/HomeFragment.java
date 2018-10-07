@@ -1,6 +1,7 @@
 package com.mrxia.meditation.layout;
 
 import android.app.DownloadManager;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -29,6 +30,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Response;
 
 
+import static com.mrxia.meditation.MyApplication.isLogin;
 import static com.mrxia.meditation.MyApplication.urlStarter;
 
 
@@ -54,7 +56,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         title_1 = view.findViewById(R.id.notification_title_1);
         content_1 = view.findViewById(R.id.notification_content_1);
-
         RelativeLayout notification_layout_1 = view.findViewById(R.id.notification_1);
         notification_layout_1.setOnClickListener(this);
 
@@ -63,7 +64,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        //Log.d("mrxiaa", "clicking");
+        if (isLogin) {
+            getNotification();
+        } else {
+            Intent intent=new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private void getNotification(){
         String url = urlStarter + "/homeNotification";
         Log.d("mrxiaa", "using url " + url);
 
@@ -87,7 +96,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                             content_1.setText(jsonArray.getJSONObject(0).getString("content"));
                         }
                     });
-                } catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
