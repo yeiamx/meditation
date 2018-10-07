@@ -12,6 +12,7 @@
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO"  />
 
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -29,6 +30,7 @@
             </intent-filter>
         </activity>
 
+
         <activity
             android:name=".layout.LoginActivity"
             android:screenOrientation="portrait" />
@@ -36,13 +38,14 @@
             android:name=".layout.RegisterActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".layout.MusicPlayActivity"
+            android:name=".layout.music.MusicPlayActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".layout.MusicSettingActivity"
+            android:name=".layout.music.MusicSettingActivity"
             android:screenOrientation="portrait" />
 
         <service android:name=".service.MusicPlayerService" />
+
     </application>
 
 </manifest>

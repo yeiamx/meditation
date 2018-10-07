@@ -1,4 +1,4 @@
-package com.mrxia.meditation.layout;
+package com.mrxia.meditation.layout.music;
 
 import android.Manifest;
 import android.annotation.SuppressLint;

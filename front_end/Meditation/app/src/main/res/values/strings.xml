@@ -18,4 +18,7 @@
     <string name="musicDir2">/Music/仙剑奇侠传六-主题曲-《誓言成晖》.mp3</string>
     <string name="musicDir3">/Music/仙剑奇侠传六-主题曲-《镜中人》.mp3</string>
     <string name="musicDir4">/Music/仙剑奇侠传六-主题曲-《浪花》.mp3</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

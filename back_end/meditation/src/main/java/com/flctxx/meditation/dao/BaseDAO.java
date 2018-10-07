@@ -49,7 +49,7 @@ public class BaseDAO<T> {
      * Update if exists else create.
      * @param object
      */
-    public void saveOrUpdate(T object) {
+    public Boolean saveOrUpdate(T object) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
         try {
             session.beginTransaction();
@@ -58,9 +58,10 @@ public class BaseDAO<T> {
         } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
-        } finally {
             session.close();
+            return false;
         }
+		return true;
     }
 
     /**
@@ -92,18 +93,33 @@ public class BaseDAO<T> {
     }
     
     public List<T> listFromId(String userId, String tableName) {
-        Session session = SessionFactoryHelper.getSessionFactory().openSession();
-        try {
-            session.beginTransaction();
-                
-            String hql = "from " + tableName+ " Where id=?";     
-            Query q = session.createQuery(hql) ;     
-            q.setString(0, userId);
-            return q.list();
-       }  finally {
-            session.getTransaction().commit();
-            session.close();
+       Session session = SessionFactoryHelper.getSessionFactory().openSession();
+       try{
+	        session.beginTransaction();
+	            
+	        String hql = "from " + tableName+ " Where id=?";     
+	        Query q = session.createQuery(hql) ;     
+	        q.setString(0, userId);
+	        return q.list();
+       } finally {
+	        session.getTransaction().commit();
+	        session.close();
        }
+    }
+    
+    public List<T> listFromDifferId(String userId, String idColumnName, String tableName){
+        Session session = SessionFactoryHelper.getSessionFactory().openSession();
+        try{
+	        session.beginTransaction();
+	            
+	        String hql = "from " + tableName+ " Where "+idColumnName+"=?";     
+	        Query q = session.createQuery(hql) ;     
+	        q.setString(0, userId);
+	        return q.list();
+	   } finally {
+	        session.getTransaction().commit();
+	        session.close();
+   }
     }
     
     public List<T> list(String hql) {

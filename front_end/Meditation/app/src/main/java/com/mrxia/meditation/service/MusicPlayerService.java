@@ -21,7 +21,7 @@ import android.widget.RemoteViews;
 
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.MusicInfo;
-import com.mrxia.meditation.layout.MusicPlayActivity;
+import com.mrxia.meditation.layout.music.MusicPlayActivity;
 
 import java.util.List;
 
