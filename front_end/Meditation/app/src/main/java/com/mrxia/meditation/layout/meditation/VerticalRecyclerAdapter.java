@@ -1,8 +1,10 @@
 package com.mrxia.meditation.layout.meditation;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,8 @@ import android.widget.TextView;
 
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.Notification;
+import com.mrxia.meditation.utils.ActivityUtil;
+import com.mrxia.meditation.utils.ItemClickListener;
 
 import java.util.List;
 
@@ -53,11 +57,22 @@ public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecycl
             hor_recyclerview = itemView.findViewById(R.id.meditation_ver_item);
         }
 
-        private void refreshData(List<Notification> data, int position){
+        private void refreshData(List<Notification> data, final int verposition){
             ViewGroup.LayoutParams layoutParams = hor_recyclerview.getLayoutParams();
             layoutParams.height =dip2px(200, context);
             hor_recyclerview.setLayoutParams(layoutParams);
             hor_recyclerview.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false));
+            hor_recyclerview.addOnItemTouchListener(new ItemClickListener(hor_recyclerview, new ItemClickListener.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    ActivityUtil.showToast(context, verposition+":"+position);
+                }
+
+                @Override
+                public void onItemLongClick(View view, int position) {
+
+                }
+            }));
             hor_recyclerview.setAdapter(new HorizontalRecyclerViewAdapter(data));
         }
     }
@@ -85,6 +100,7 @@ public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecycl
             return data.size();
         }
     }
+
     class HorizontalItemViewHolder extends RecyclerView.ViewHolder{
         TextView content;
         TextView title;

@@ -51,8 +51,8 @@ public class SectionDecoration extends RecyclerView.ItemDecoration {
         int pos = parent.getChildAdapterPosition(view);
         Log.i(TAG, "getItemOffsets：" + pos);
         long groupId = callback.getGroupId(pos);
-        //if (groupId < 0) return;
-        if (pos != 0 && isFirstInGroup(pos)) {//同组的第一个才添加padding 第一个为carouselView
+        if (groupId < 0) return;
+        if (isFirstInGroup(pos)) {
             outRect.top = topGap;
         } else {
             outRect.top = 0;

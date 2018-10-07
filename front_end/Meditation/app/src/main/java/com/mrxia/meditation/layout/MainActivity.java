@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         navigationBar.setMode(BottomNavigationBar.MODE_FIXED);
 
         navigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
-        navigationBar.setBarBackgroundColor(R.color.transparent_background);
+        navigationBar.setBarBackgroundColor(R.color.transparent);
 
         navigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Home")
                 .setActiveColorResource(R.color.bottom_active))
