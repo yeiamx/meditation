@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/article_qa_item_iv"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/q"
+        android:padding="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        />
+    <TextView
+        android:id="@+id/article_qa_item_textview"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:textSize="22sp"
+        android:paddingLeft="100dp"
+        android:paddingTop="20dp"
+        android:text="how are you"
+        android:fontFamily="serif"
+
+        />
+
+</RelativeLayout>

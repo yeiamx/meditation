@@ -14,12 +14,11 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
-import org.mockito.Mockito;
 
 import com.flctxx.meditation.AbstractTest;
 import com.flctxx.meditation.utils.NetworkUtility;
 
-public abstract class AbstractTest extends Mockito {
+public abstract class AbstractTest {
     protected static String urlStarter;
     protected static String postUrl;
     protected static String getUrl;
