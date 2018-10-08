@@ -28,7 +28,6 @@ public class MeditationFragment extends Fragment{
         return frag;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

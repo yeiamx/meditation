@@ -9,16 +9,17 @@
         android:id="@+id/meditation_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
+        android:layout_marginTop="28dp"
         android:textSize="28sp"
         android:textColor="@color/theme_blue"
         android:textStyle="bold"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/meditation_tablayout"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:tabMode="fixed"
         app:tabSelectedTextColor="@color/theme_blue"
         app:tabIndicatorColor="@color/theme_blue"
         app:tabTextColor="@color/blackGray">
@@ -29,7 +30,5 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
-    
-
 
 </LinearLayout>
