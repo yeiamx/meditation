@@ -79,6 +79,7 @@ public class MeditationFragment extends Fragment{
         title.setTypeface(typeface);
         title.setText("Meditation");
 
+
         titles.add("冥想之旅");titles.add("分类冥想");titles.add("QUICK START");
         mTabLayout = view.findViewById(R.id.meditation_tablayout);
         mTabLayout.addTab(mTabLayout.newTab().setText(titles.get(0)));

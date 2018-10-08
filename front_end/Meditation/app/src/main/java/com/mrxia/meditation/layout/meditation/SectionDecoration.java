@@ -31,13 +31,13 @@ public class SectionDecoration extends RecyclerView.ItemDecoration {
         this.callback = decorationCallback;
 
         paint = new Paint();
-        paint.setColor(res.getColor(R.color.colorAccent));
+        paint.setColor(res.getColor(R.color.white));
 
         textPaint = new TextPaint();
         textPaint.setTypeface(Typeface.DEFAULT);
         textPaint.setAntiAlias(true);
         textPaint.setTextSize(40);
-        textPaint.setColor(Color.BLACK);
+        textPaint.setColor(Color.WHITE);
         textPaint.getFontMetrics(fontMetrics);
         textPaint.setTextAlign(Paint.Align.LEFT);
         fontMetrics = new Paint.FontMetrics();

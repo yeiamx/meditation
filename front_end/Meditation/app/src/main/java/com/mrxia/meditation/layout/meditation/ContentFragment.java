@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.Notification;
 
@@ -42,7 +43,7 @@ public class ContentFragment extends Fragment {
     private void initData(){
         data = new ArrayList<>();
         for (int i=0; i<10;i++) {
-            data.add(new Notification(null, String.valueOf(i), "testetestststeeset", null));
+            data.add(new Notification(null, String.valueOf(i), "testetestststeeset", MyApplication.resUrlStarter+"/img/xianqi.jpg"));
         }
     }
 
