@@ -1,5 +1,6 @@
 package com.mrxia.meditation.layout.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.Image;
@@ -15,9 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
+import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.layout.LoginActivity;
 import com.mrxia.meditation.utils.HttpUtil;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -37,6 +40,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private TextView title_1;
     private TextView content_1;
     private ImageView settingButton;
+    private ImageView backgroundImageView;
     RelativeLayout notification_layout_1;
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -47,10 +51,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState) {
         // 1. 加载布局，第三个参数必须为`false`，否则会加载两次布局并且抛出异常！！
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         initView(view);
         registerListener();
-
         return view;
     }
 
@@ -64,6 +66,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         content_1 = view.findViewById(R.id.notification_content_1);
         notification_layout_1 = view.findViewById(R.id.notification_1);
         settingButton = view.findViewById(R.id.home_setting_button);
+        backgroundImageView = view.findViewById(R.id.home_background);
     }
 
     public void registerListener(){
@@ -71,10 +74,27 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         settingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), SettingActivity.class);
-                startActivity(intent);
+                Intent intent=new Intent(getContext(), SettingActivity.class);
+                startActivityForResult(intent, 1);
             }
         });
+    }
+
+    public void refreshData(){
+        if (MyApplication.themeImageUrl!=null) {
+            Picasso
+                    .with(getActivity())
+                    .load(MyApplication.themeImageUrl)
+                    .into(backgroundImageView);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            refreshData();
+        }
     }
 
     @Override
