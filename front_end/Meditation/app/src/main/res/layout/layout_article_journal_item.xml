@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/article_journal_item_iv"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/q"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        />
+    <TextView
+        android:id="@+id/article_journal_item_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="100dp"
+        android:text="thinker"
+        android:fontFamily="serif"
+
+        />
+    <TextView
+        android:id="@+id/article_journal_item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_below="@+id/article_journal_item_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="100dp"
+        android:text="2018/10/1"
+        android:fontFamily="monospace"
+        android:textColor="#a09e9595"
+        android:layout_marginBottom="15dp"
+
+    />
+    <TextView
+        android:id="@+id/article_journal_item_content"
+        android:layout_below="@id/article_journal_item_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="10dp"
+        android:text="今天是十月一日"
+        android:fontFamily="serif" />
+
+</RelativeLayout>

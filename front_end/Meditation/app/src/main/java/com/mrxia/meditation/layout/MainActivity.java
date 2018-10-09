@@ -15,6 +15,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
+import com.mrxia.meditation.layout.article.ArticleFragment;
 import com.mrxia.meditation.layout.home.HomeFragment;
 import com.mrxia.meditation.layout.meditation.MeditationFragment;
 import com.mrxia.meditation.layout.music.MusicFrament;
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                         .setActiveColorResource(R.color.bottom_active))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Meditation")
                         .setActiveColorResource(R.color.bottom_active))
+                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Article")
+                        .setActiveColorResource(R.color.bottom_active))
                 .setFirstSelectedPosition(0)//默认选择索引为0的菜单
                 .initialise();//对导航进行重绘
 
@@ -85,9 +88,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         fragments.add(MusicFrament.newInstance());
         fragmentTags.add("music");
         fragments.add(MeditationFragment.newInstance());
+
         fragmentTags.add("meditation");
+        fragments.add(ArticleFragment.newInstance());
+
+        fragmentTags.add("article");
 
         setDefaultFragment();
+
     }
 
     @Override

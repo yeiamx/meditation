@@ -30,6 +30,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".layout.article.ArticleContentActivity" />
+        <activity android:name=".layout.article.ArticleQaActivity" />
+        <activity android:name=".layout.article.ArticleJournalActivity"/>
+
         <activity
             android:name=".layout.LoginActivity"
             android:screenOrientation="portrait" />
@@ -47,6 +52,7 @@
         <service android:name=".service.MusicPlayerService" />
 
         <activity android:name=".layout.home.SettingActivity"></activity>
+
     </application>
 
 </manifest>
