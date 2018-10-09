@@ -28,14 +28,15 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/menu1"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="42dp"
         android:layout_marginLeft="15dp"/>
 
     <ImageView
+        android:id="@+id/home_setting_button"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:src="@drawable/setting1"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="42dp"
         android:layout_marginLeft="315dp"/>
 
     <RelativeLayout
@@ -81,7 +82,7 @@
             android:paddingBottom="2dp"
             android:paddingLeft="10dp"
             android:fontFamily="serif"
-            android:text="     just do something september 25 "
+            android:text="just do something september 25 "
             android:textSize="16sp"
             />
 

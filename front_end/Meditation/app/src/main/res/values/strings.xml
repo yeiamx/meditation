@@ -1,8 +1,26 @@
 <resources>
     <string name="app_name">Meditation</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
+    <string name="btnPlayerPause">PlAY/PAUSE</string>
+    <string name="btnStop">STOP</string>
+    <string name="btnQuit">QUIT</string>
+    <string name="btnPre">PREVIOUS</string>
+    <string name="btnNext">NEXT</string>
+
+    <string name="play">Play</string>
+    <string name="playing">Playing</string>
+    <string name="pause">Pause</string>
+
+    <string name="musicDir">/Music/You.mp3</string>
+    <string name="musicDir1">/Music/仙剑奇侠传六-主题曲-《剑客不能说》.mp3</string>
+    <string name="musicDir2">/Music/仙剑奇侠传六-主题曲-《誓言成晖》.mp3</string>
+    <string name="musicDir3">/Music/仙剑奇侠传六-主题曲-《镜中人》.mp3</string>
+    <string name="musicDir4">/Music/仙剑奇侠传六-主题曲-《浪花》.mp3</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="example_article_title">怎样开始冥想（上）</string>
     <string name="example_article_content">   信或不信，每天进行冥想将大大有助于你内心的平静。每天20分钟的冥想练习能有效促进我们的身心健康。不管你平时是否坚持，有规律的冥想能使我们从忙碌的生活中理出头绪。这篇文章将介绍如何冥想，以及如何建立你个人日常冥想习惯的问题。
 
@@ -102,5 +120,6 @@ Dwelling in the present moment, I breathe in. (Being present) Enjoying the prese
 Aware of my stable posture, I breathe in. (Stable posture) Enjoying the stability, I breathe out. (Enjoying)
 
 感知我稳定的体态，我吸入空气（保持姿势）。享受这种稳定感，我呼出空气（享受）。</string>
+
 
 </resources>

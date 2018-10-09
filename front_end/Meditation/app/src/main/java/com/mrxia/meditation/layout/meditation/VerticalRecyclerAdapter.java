@@ -2,21 +2,25 @@ package com.mrxia.meditation.layout.meditation;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.Notification;
 import com.mrxia.meditation.utils.ActivityUtil;
 import com.mrxia.meditation.utils.ItemClickListener;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
 import static com.mrxia.meditation.utils.ActivityUtil.dip2px;
 
 public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecyclerAdapter.VerticalHolder>{
@@ -104,15 +108,22 @@ public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecycl
     class HorizontalItemViewHolder extends RecyclerView.ViewHolder{
         TextView content;
         TextView title;
+        ImageView cardBackground;
         public HorizontalItemViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.meditation_noti_title);
             content = itemView.findViewById(R.id.meditation_noti_content);
+            cardBackground = itemView.findViewById(R.id.meditation_content_cardback);
         }
 
         public void refreshData(List<Notification> data, int position){
             title.setText(data.get(position).getTitle());
             content.setText(data.get(position).getContent());
+            //ImageLoader.getInstance().displayImage(data.get(position).getImgUrl(), cardBackground);
+            Picasso
+                    .with(context)
+                    .load(data.get(position).getImgUrl())
+                    .into(cardBackground);
         }
     }
 }

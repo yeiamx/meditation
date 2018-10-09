@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.mrxia.meditation">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,6 +9,10 @@
 
     <!-- 使用相机 -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".MyApplication"
@@ -16,18 +21,38 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".layout.MainActivity">
+        <activity
+            android:name=".layout.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".layout.LoginActivity" />
-        <activity android:name=".layout.RegisterActivity" />
+
         <activity android:name=".layout.article.ArticleContentActivity" />
         <activity android:name=".layout.article.ArticleQaActivity" />
         <activity android:name=".layout.article.ArticleJournalActivity"></activity>
+
+        <activity
+            android:name=".layout.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".layout.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".layout.music.MusicPlayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".layout.music.MusicSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".layout.music.TestPlayActivity" />
+
+        <service android:name=".service.MusicPlayerService" />
+
+        <activity android:name=".layout.home.SettingActivity"></activity>
+
     </application>
 
 </manifest>
