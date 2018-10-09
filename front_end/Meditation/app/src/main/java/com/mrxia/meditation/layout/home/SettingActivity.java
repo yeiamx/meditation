@@ -49,6 +49,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         }
         Intent intent = new Intent();
         setResult(RESULT_OK, intent);
+        intent.putExtra("class", "setting");
         finish();
     }
 }

@@ -14,6 +14,8 @@ public class MyApplication extends Application {
     public static boolean isLogin = false;
     public static DisplayImageOptions options;
     public static String themeImageUrl;
+    public static int SETTING = 666;
+
     @Override
     public void onCreate() {
         super.onCreate();

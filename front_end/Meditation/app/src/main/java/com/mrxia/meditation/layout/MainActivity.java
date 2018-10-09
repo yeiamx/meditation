@@ -13,6 +13,7 @@ import android.view.WindowManager;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.layout.home.HomeFragment;
 import com.mrxia.meditation.layout.meditation.MeditationFragment;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     private List<Fragment> fragments;
     private List<String> fragmentTags;
-
+    private Fragment mContent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 .setFirstSelectedPosition(0)//默认选择索引为0的菜单
                 .initialise();//对导航进行重绘
 
-        setDefaultFragment();
         navigationBar.setTabSelectedListener(this);
 
     }
@@ -67,8 +67,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private void setDefaultFragment() {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.id_content, HomeFragment.newInstance());
+        transaction.replace(R.id.id_content, fragments.get(0), fragmentTags.get(0));
         transaction.commit();
+        mContent = fragments.get(0);
     }
 
     /**
@@ -85,17 +86,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         fragmentTags.add("music");
         fragments.add(MeditationFragment.newInstance());
         fragmentTags.add("meditation");
+
+        setDefaultFragment();
     }
 
     @Override
     public void onTabSelected(int position) {
         if (fragments != null) {
-            if (position < fragments.size()) {
+            if (position < fragments.size() && mContent!=fragments.get(position)) {
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.id_content, fragments.get(position), fragmentTags.get(position));
-                ft.commitAllowingStateLoss();//选择性的提交，和commit有一定的区别，他不保证数据完整传输
+                if (!fragments.get(position).isAdded()) {
+                    ft.hide(mContent).add(R.id.id_content, fragments.get(position), fragmentTags.get(position)).commit();
+                } else {
+                    ft.hide(mContent).show(fragments.get(position)).commit();
+                }
             }
+        mContent = fragments.get(position);
         }
     }
 
@@ -112,9 +119,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("home");
-            //通过id或者tag可以从manager获取fragment对象，
-            fragment.onActivityResult(requestCode, resultCode, data);
+            if (data.getStringExtra("class").equals("setting")) {
+                HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("home");
+                //通过id或者tag可以从manager获取fragment对象，
+                fragment.onActivityResult(requestCode, resultCode, data);
+            }
         }
     }
 
