@@ -15,12 +15,6 @@
         android:alpha="0.5"
         android:scaleType="fitXY" />
 
-    <ImageView
-        android:id="@+id/MusicImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:scaleType="fitCenter" />
 
     <TextView
         android:id="@+id/MusicName"

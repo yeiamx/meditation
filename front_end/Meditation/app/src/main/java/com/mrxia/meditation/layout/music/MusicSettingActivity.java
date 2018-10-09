@@ -171,6 +171,7 @@ public class MusicSettingActivity extends Activity {
         if (visualizer != null) {
             visualizer = null;
         }
+
         visualizer = new Visualizer(mediaPlayer.getAudioSessionId());
         visualizer.setEnabled(false);
         //设置需要转换的音乐内容长度，专业的说这就是采样，该采样值一般为2的指数倍，如64,128,256,512,1024。

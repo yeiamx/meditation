@@ -8,10 +8,8 @@
 
     <!-- 使用相机 -->
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO"  />
-
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".MyApplication"
@@ -29,8 +27,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".layout.LoginActivity"
             android:screenOrientation="portrait" />
@@ -46,6 +42,7 @@
 
         <service android:name=".service.MusicPlayerService" />
 
+        <activity android:name=".layout.music.TestPlayActivity"></activity>
     </application>
 
 </manifest>
