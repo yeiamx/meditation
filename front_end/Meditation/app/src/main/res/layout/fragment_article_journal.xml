@@ -3,21 +3,30 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/article_journal_logan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:textColor="@color/blackGray"
+        android:textSize="20sp" />
+
     <ImageButton
         android:id="@+id/article_journal_add_btn"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
         android:layout_marginTop="10dp"
         android:background="#00ffffff"
         android:layout_alignParentRight="true"
         android:layout_marginRight="30dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/add"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/plus" />
 
-        />
-<android.support.v7.widget.RecyclerView
-    android:layout_below="@+id/article_journal_add_btn"
-    android:id="@+id/article_journal_rv"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/article_journal_add_btn"
+        android:id="@+id/article_journal_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>

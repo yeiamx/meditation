@@ -47,8 +47,6 @@
         android:layout_marginLeft="100dp"
         android:layout_marginBottom="10dp"
         android:text="今天是十月一日"
-        android:fontFamily="serif"
-
-        />
+        android:fontFamily="serif" />
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.mrxia.meditation.layout.article;
 
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mrxia.meditation.R;
@@ -31,6 +33,7 @@ public class JournalFragment extends Fragment {
     private RecyclerView rv;
     private DividerItemDecoration mDividerItemDecoration;
     private ImageButton btn;
+    private TextView logan;
 
     private List<Journal> mDataList;
 
@@ -72,6 +75,10 @@ public class JournalFragment extends Fragment {
 //                startActivityForResult(intent, 1);
 //            }
 //        });
+        logan = view.findViewById(R.id.article_journal_logan);
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/SetoFont.ttf");
+        logan.setTypeface(typeface);
+        logan.setText("今天心情如何");
 
         btn = view.findViewById(R.id.article_journal_add_btn);
         btn.setOnClickListener(new View.OnClickListener() {
