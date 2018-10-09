@@ -4,6 +4,9 @@ buildscript {
     repositories {
         jcenter()
         google()
+        maven {
+            url "https://jitpack.io"
+        }
     }
     dependencies {
         classpath'com.android.tools.build:gradle:3.0.0'//与AS版本一致
@@ -17,6 +20,9 @@ allprojects {
     repositories {
         jcenter()
         google() //新增
+        maven {
+            url "https://jitpack.io"
+        }
     }
 }
 

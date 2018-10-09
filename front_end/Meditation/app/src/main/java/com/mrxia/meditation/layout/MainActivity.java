@@ -19,6 +19,7 @@ import com.mrxia.meditation.layout.article.ArticleFragment;
 import com.mrxia.meditation.layout.home.HomeFragment;
 import com.mrxia.meditation.layout.meditation.MeditationFragment;
 import com.mrxia.meditation.layout.music.MusicFrament;
+import com.mrxia.meditation.profile.ProfileFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
         navigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Home")
                 .setActiveColorResource(R.color.bottom_active))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Music")
+                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Profile")
                         .setActiveColorResource(R.color.bottom_active))
                 .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Meditation")
                         .setActiveColorResource(R.color.bottom_active))
@@ -85,13 +86,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         fragmentTags = new ArrayList<>();
         fragments.add(HomeFragment.newInstance());
         fragmentTags.add("home");
-        fragments.add(MusicFrament.newInstance());
-        fragmentTags.add("music");
+        fragments.add(ProfileFragment.newInstance());
+        fragmentTags.add("profile");
         fragments.add(MeditationFragment.newInstance());
-
         fragmentTags.add("meditation");
         fragments.add(ArticleFragment.newInstance());
-
         fragmentTags.add("article");
 
         setDefaultFragment();
