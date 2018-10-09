@@ -54,7 +54,7 @@ public class MusicFrament extends Fragment {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putInt("key", R.raw.aaa);
+                //bundle.putInt("key",);
                 bundle.putString("songs","LJQNB");
                 bundle.putString("author","LJQ");
                 Intent intent = new Intent();

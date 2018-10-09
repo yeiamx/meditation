@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.mrxia.meditation">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -8,7 +9,8 @@
 
     <!-- 使用相机 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
@@ -27,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
+
         <activity
             android:name=".layout.LoginActivity"
             android:screenOrientation="portrait" />
@@ -44,11 +46,7 @@
         <service android:name=".service.MusicPlayerService" />
 
         <activity android:name=".layout.music.TestPlayActivity"></activity>
-=======
-        <activity android:name=".layout.LoginActivity" />
-        <activity android:name=".layout.RegisterActivity" />
-        <activity android:name=".layout.home.SettingActivity"></activity>
->>>>>>> master
+
     </application>
 
 </manifest>
