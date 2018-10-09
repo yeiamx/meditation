@@ -90,6 +90,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         fragments.add(MeditationFragment.newInstance());
 
         fragmentTags.add("meditation");
+        fragments.add(ArticleFragment.newInstance());
+
+        fragmentTags.add("article");
 
         setDefaultFragment();
 

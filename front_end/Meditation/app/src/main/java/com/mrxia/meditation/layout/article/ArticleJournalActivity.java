@@ -1,5 +1,6 @@
 package com.mrxia.meditation.layout.article;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
@@ -61,10 +62,11 @@ public class ArticleJournalActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(et.getText())){
                     Toast.makeText(ArticleJournalActivity.this,"请输入日志内容", Toast.LENGTH_SHORT).show();
                 }else{
+                   // Toast.makeText(ArticleJournalActivity.this,"jjj", Toast.LENGTH_SHORT).show();
                     String newJournal = et.getText().toString();
                     Intent intent = new Intent();
                     intent.putExtra("newJournal", newJournal);
-                    setResult(2, intent);
+                    setResult(4, intent);
                     finish();
                 }
             }

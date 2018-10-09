@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <EditText
-        android:id="@+id/article_journal_edittext_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="记录自己的冥想历程"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:paddingLeft="5dp"
-        android:background="@drawable/edit_bg"/>
+
+    <ImageButton
+        android:id="@+id/article_journal_add_btn"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="#00ffffff"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/add"
+
+        />
 <android.support.v7.widget.RecyclerView
+    android:layout_below="@+id/article_journal_add_btn"
     android:id="@+id/article_journal_rv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
-</LinearLayout>
+</RelativeLayout>

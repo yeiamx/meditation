@@ -36,10 +36,12 @@ public class ContentFragment extends Fragment {
     public void initData(){
         this.mDataList = new ArrayList<Article>();
         for(int i=0;i<20;i++){
-            if(i % 2 == 0){
+            if(i % 3 == 0){
             mDataList.add(new Article(""+i, getResources().getString(R.string.example_article_title), getResources().getString(R.string.example_article_content), R.drawable.content1));
-            }else{
+            }else if(i % 3 ==1){
                 mDataList.add(new Article(""+i, getResources().getString(R.string.example_article_title_1), getResources().getString(R.string.example_article_content_1), R.drawable.content2));
+            }else {
+                mDataList.add(new Article(""+i, "meditation", "meditation", R.drawable.article_1));
             }
         }
     }
@@ -79,7 +81,7 @@ public class ContentFragment extends Fragment {
         @Override
         public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
             super.getItemOffsets(outRect, view, parent, state);
-            outRect.set(5,5,5,5);
+            outRect.set(15,15,15,15);
         }
     }
 }

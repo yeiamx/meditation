@@ -10,7 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.Journal;
@@ -27,6 +30,7 @@ public class JournalFragment extends Fragment {
     private EditText et;
     private RecyclerView rv;
     private DividerItemDecoration mDividerItemDecoration;
+    private ImageButton btn;
 
     private List<Journal> mDataList;
 
@@ -59,16 +63,24 @@ public class JournalFragment extends Fragment {
     }
 
     public void initView(View view) {
-        et = view.findViewById(R.id.article_journal_edittext_1);
-        et.setFocusable(false);
-        et.setOnClickListener(new View.OnClickListener() {
+//        et = view.findViewById(R.id.article_journal_edittext_1);
+//        et.setFocusable(false);
+//        et.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(), ArticleJournalActivity.class);
+//                startActivityForResult(intent, 1);
+//            }
+//        });
+
+        btn = view.findViewById(R.id.article_journal_add_btn);
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ArticleJournalActivity.class);
                 startActivityForResult(intent, 1);
             }
         });
-
         rv = view.findViewById(R.id.article_journal_rv);
         rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         //rv.addItemDecoration(new ContentFragment.MyDecoration());
@@ -83,7 +95,7 @@ public class JournalFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 2) {
+        if (resultCode == 4) {
             if (requestCode == 1) {
                 String newJournal = data.getStringExtra("newJournal");
                 long time=System.currentTimeMillis();//long now = android.os.SystemClock.uptimeMillis();

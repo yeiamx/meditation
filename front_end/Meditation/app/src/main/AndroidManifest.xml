@@ -33,7 +33,7 @@
 
         <activity android:name=".layout.article.ArticleContentActivity" />
         <activity android:name=".layout.article.ArticleQaActivity" />
-        <activity android:name=".layout.article.ArticleJournalActivity"></activity>
+        <activity android:name=".layout.article.ArticleJournalActivity"/>
 
         <activity
             android:name=".layout.LoginActivity"
