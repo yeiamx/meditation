@@ -13,7 +13,7 @@ public class MyApplication extends Application {
     //public static final String urlStarter = "http://192.168.199.121:8080/meditation";
     public static boolean isLogin = false;
     public static DisplayImageOptions options;
-
+    public static String themeImageUrl;
     @Override
     public void onCreate() {
         super.onCreate();

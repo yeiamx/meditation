@@ -1,5 +1,6 @@
 package com.mrxia.meditation.layout;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,12 +24,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener{
 
     private List<Fragment> fragments;
+    private List<String> fragmentTags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        fragments = new ArrayList<>();
+        getFragments();
         initView();
         setHalfTransparent();
         setFitSystemWindow(false);
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 .setFirstSelectedPosition(0)//默认选择索引为0的菜单
                 .initialise();//对导航进行重绘
 
-        fragments = getFragments();
         setDefaultFragment();
         navigationBar.setTabSelectedListener(this);
 
@@ -75,13 +76,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
      *
      * @return fragment列表
      */
-    private List<Fragment> getFragments() {
-
-        List<Fragment> fragments = new ArrayList<>();
+    private void getFragments() {
+        fragments = new ArrayList<>();
+        fragmentTags = new ArrayList<>();
         fragments.add(HomeFragment.newInstance());
+        fragmentTags.add("home");
         fragments.add(MusicFrament.newInstance());
+        fragmentTags.add("music");
         fragments.add(MeditationFragment.newInstance());
-        return fragments;
+        fragmentTags.add("meditation");
     }
 
     @Override
@@ -90,8 +93,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
             if (position < fragments.size()) {
                 FragmentManager fm = getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                Fragment fragment = fragments.get(position);
-                ft.replace(R.id.id_content, fragment);
+                ft.replace(R.id.id_content, fragments.get(position), fragmentTags.get(position));
                 ft.commitAllowingStateLoss();//选择性的提交，和commit有一定的区别，他不保证数据完整传输
             }
         }
@@ -105,6 +107,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     @Override
     public void onTabReselected(int position) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("home");
+            //通过id或者tag可以从manager获取fragment对象，
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     /**

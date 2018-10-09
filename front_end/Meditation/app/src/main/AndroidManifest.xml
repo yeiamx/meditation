@@ -46,7 +46,7 @@
         <service android:name=".service.MusicPlayerService" />
 
         <activity android:name=".layout.music.TestPlayActivity"></activity>
-
+        <activity android:name="layout.home.SettingActivity"></activity>
     </application>
 
 </manifest>
