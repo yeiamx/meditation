@@ -1,55 +1,129 @@
 package com.mrxia.meditation.layout.meditation;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mrxia.meditation.R;
+import com.mrxia.meditation.bean.Notification;
+import com.mrxia.meditation.utils.ActivityUtil;
+import com.mrxia.meditation.utils.ItemClickListener;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import static com.mrxia.meditation.utils.ActivityUtil.dip2px;
 
-public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecyclerAdapter.MyHolder>{
+public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecyclerAdapter.VerticalHolder>{
     private Context context;
-    private List data;
+    private List<Notification> data;
 
-    public VerticalRecyclerAdapter(Context context, List data) {
+    public VerticalRecyclerAdapter(Context context, List<Notification> data) {
         this.context = context;
         this.data = data;
     }
 
-
     @Override
-    public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public VerticalHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_meditation_content_veritem, parent, false);
-        MyHolder myHolder = new MyHolder(view);
-
-        return myHolder;
+        return new VerticalHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyHolder holder, int position) {
-        holder.textView.setText(String.valueOf(position));
+    public void onBindViewHolder(VerticalHolder holder, int position) {
+        holder.refreshData(data, position);
     }
 
     @Override
     public int getItemCount() {
-        return 10;//data.size();
+        return 3;
     }
 
-    public void update(List data){
+    public void update(List<Notification> data){
         this.data = data;
         notifyDataSetChanged();
     }
 
-    class MyHolder extends RecyclerView.ViewHolder{
-        TextView textView;
+    class VerticalHolder extends RecyclerView.ViewHolder{
+        private RecyclerView hor_recyclerview;
 
-        MyHolder(View itemView) {
+        VerticalHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.test_text);
+            hor_recyclerview = itemView.findViewById(R.id.meditation_ver_item);
+        }
+
+        private void refreshData(List<Notification> data, final int verposition){
+            ViewGroup.LayoutParams layoutParams = hor_recyclerview.getLayoutParams();
+            layoutParams.height =dip2px(200, context);
+            hor_recyclerview.setLayoutParams(layoutParams);
+            hor_recyclerview.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL, false));
+            hor_recyclerview.addOnItemTouchListener(new ItemClickListener(hor_recyclerview, new ItemClickListener.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    ActivityUtil.showToast(context, verposition+":"+position);
+                }
+
+                @Override
+                public void onItemLongClick(View view, int position) {
+
+                }
+            }));
+            hor_recyclerview.setAdapter(new HorizontalRecyclerViewAdapter(data));
+        }
+    }
+
+    class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<HorizontalItemViewHolder>{
+        private List<Notification> data;
+
+        public HorizontalRecyclerViewAdapter(List<Notification> data){
+            this.data = data;
+        }
+
+        @Override
+        public HorizontalItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_meditation_content_horitem, parent, false);
+            return new HorizontalItemViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(HorizontalItemViewHolder holder, int position) {
+            holder.refreshData(data, position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return data.size();
+        }
+    }
+
+    class HorizontalItemViewHolder extends RecyclerView.ViewHolder{
+        TextView content;
+        TextView title;
+        ImageView cardBackground;
+        public HorizontalItemViewHolder(View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.meditation_noti_title);
+            content = itemView.findViewById(R.id.meditation_noti_content);
+            cardBackground = itemView.findViewById(R.id.meditation_content_cardback);
+        }
+
+        public void refreshData(List<Notification> data, int position){
+            title.setText(data.get(position).getTitle());
+            content.setText(data.get(position).getContent());
+            //ImageLoader.getInstance().displayImage(data.get(position).getImgUrl(), cardBackground);
+            Picasso
+                    .with(context)
+                    .load(data.get(position).getImgUrl())
+                    .into(cardBackground);
         }
     }
 }

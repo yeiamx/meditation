@@ -27,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity
             android:name=".layout.LoginActivity"
             android:screenOrientation="portrait" />
@@ -43,6 +44,11 @@
         <service android:name=".service.MusicPlayerService" />
 
         <activity android:name=".layout.music.TestPlayActivity"></activity>
+=======
+        <activity android:name=".layout.LoginActivity" />
+        <activity android:name=".layout.RegisterActivity" />
+        <activity android:name=".layout.home.SettingActivity"></activity>
+>>>>>>> master
     </application>
 
 </manifest>
