@@ -14,5 +14,6 @@
     <color name="theme_blue">#105978</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
-
+    <color name="darkpurple">#4f2468</color>
+    <color name="shallowpurple">#dabdeb</color>
 </resources>

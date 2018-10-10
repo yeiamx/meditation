@@ -19,7 +19,6 @@
         android:textColor="#FFFFFF"
         android:paddingLeft="5dp"
         android:padding="2dp"
-        android:fontFamily="serif"
-        />
+        android:fontFamily="serif" />
 
 </RelativeLayout>

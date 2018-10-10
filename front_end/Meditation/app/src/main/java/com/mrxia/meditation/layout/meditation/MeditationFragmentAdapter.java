@@ -11,7 +11,7 @@ public class MeditationFragmentAdapter extends FragmentStatePagerAdapter{
     private List<Fragment> mFragments;
     private List<String> mTitles;
 
-    public MeditationFragmentAdapter(FragmentManager fm,List<Fragment> fragments,List<String> titles) {
+    public MeditationFragmentAdapter(FragmentManager fm, List<Fragment> fragments, List<String> titles) {
         super(fm);
         mFragments = fragments;
         mTitles = titles;

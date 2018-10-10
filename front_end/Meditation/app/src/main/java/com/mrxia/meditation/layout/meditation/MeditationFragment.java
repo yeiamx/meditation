@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mrxia.meditation.R;
@@ -22,6 +23,7 @@ public class MeditationFragment extends Fragment{
     private TabLayout mTabLayout;
     private TextView title;
     private ViewPager viewPager;
+    private LinearLayout linearLayout;
     private List<String> titles = new ArrayList<>();
     public static MeditationFragment newInstance() {
         MeditationFragment frag = new MeditationFragment();
@@ -63,7 +65,13 @@ public class MeditationFragment extends Fragment{
 
             @Override
             public void onPageSelected(int position) {
-
+                if (position==0){
+                    linearLayout.setBackground(getResources().getDrawable(R.drawable.meditation_travel_background));
+                } else if (position==1){
+                    linearLayout.setBackground(getResources().getDrawable(R.drawable.meditation_content_background));
+                } else if (position==2){
+                    linearLayout.setBackground(getResources().getDrawable(R.drawable.meditation_quick_background));
+                }
             }
 
             @Override
@@ -74,6 +82,8 @@ public class MeditationFragment extends Fragment{
     }
 
     public void initView(View view){
+        linearLayout = view.findViewById(R.id.meditation_back_linear);
+
         title = view.findViewById(R.id.meditation_title);
         Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/segoe_script.ttf");
         title.setTypeface(typeface);

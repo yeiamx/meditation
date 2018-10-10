@@ -50,13 +50,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         navigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
         navigationBar.setBarBackgroundColor(R.color.transparent);
 
-        navigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Home")
+        navigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "主页")
                 .setActiveColorResource(R.color.bottom_active))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Profile")
+                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "冥想")
                         .setActiveColorResource(R.color.bottom_active))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Meditation")
+                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "文章")
                         .setActiveColorResource(R.color.bottom_active))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "Article")
+                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "档案")
                         .setActiveColorResource(R.color.bottom_active))
                 .setFirstSelectedPosition(0)//默认选择索引为0的菜单
                 .initialise();//对导航进行重绘
@@ -86,12 +86,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         fragmentTags = new ArrayList<>();
         fragments.add(HomeFragment.newInstance());
         fragmentTags.add("home");
-        fragments.add(ProfileFragment.newInstance());
-        fragmentTags.add("profile");
         fragments.add(MeditationFragment.newInstance());
         fragmentTags.add("meditation");
         fragments.add(ArticleFragment.newInstance());
         fragmentTags.add("article");
+        fragments.add(ProfileFragment.newInstance());
+        fragmentTags.add("profile");
+
 
         setDefaultFragment();
 

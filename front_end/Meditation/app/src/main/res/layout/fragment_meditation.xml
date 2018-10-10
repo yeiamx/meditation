@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/meditation_background"
+    android:id="@+id/meditation_back_linear"
+    android:background="@drawable/meditation_travel_background"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
         android:layout_gravity="center_horizontal"

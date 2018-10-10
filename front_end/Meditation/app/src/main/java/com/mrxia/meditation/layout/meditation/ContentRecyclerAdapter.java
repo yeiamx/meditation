@@ -1,33 +1,28 @@
 package com.mrxia.meditation.layout.meditation;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.Notification;
 import com.mrxia.meditation.utils.ActivityUtil;
 import com.mrxia.meditation.utils.ItemClickListener;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import static com.mrxia.meditation.utils.ActivityUtil.dip2px;
 
-public class VerticalRecyclerAdapter extends RecyclerView.Adapter<VerticalRecyclerAdapter.VerticalHolder>{
+public class ContentRecyclerAdapter extends RecyclerView.Adapter<ContentRecyclerAdapter.VerticalHolder>{
     private Context context;
     private List<Notification> data;
 
-    public VerticalRecyclerAdapter(Context context, List<Notification> data) {
+    public ContentRecyclerAdapter(Context context, List<Notification> data) {
         this.context = context;
         this.data = data;
     }
