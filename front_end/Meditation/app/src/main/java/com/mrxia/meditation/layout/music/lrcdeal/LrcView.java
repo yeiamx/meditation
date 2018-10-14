@@ -1,4 +1,4 @@
-package com.mrxia.meditation.lrcdeal;
+package com.mrxia.meditation.layout.music.lrcdeal;
 
 import android.content.Context;
 import android.graphics.Canvas;

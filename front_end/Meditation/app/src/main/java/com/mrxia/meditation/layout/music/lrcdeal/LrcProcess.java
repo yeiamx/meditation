@@ -1,4 +1,4 @@
-package com.mrxia.meditation.lrcdeal;
+package com.mrxia.meditation.layout.music.lrcdeal;
 
 
 import com.mrxia.meditation.bean.LrcContent;

@@ -49,7 +49,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".layout.music.TestPlayActivity" />
 
-        <service android:name=".service.MusicPlayerService" />
+        <service android:name=".layout.music.MusicPlayerService" />
 
         <activity android:name=".layout.home.SettingActivity"></activity>
 

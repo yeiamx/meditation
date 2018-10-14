@@ -41,7 +41,7 @@
         android:textSize="20dp"
         android:typeface="normal" />
 
-    <com.mrxia.meditation.lrcdeal.LrcView
+    <com.mrxia.meditation.layout.music.lrcdeal.LrcView
         android:id="@+id/LrcViewId"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

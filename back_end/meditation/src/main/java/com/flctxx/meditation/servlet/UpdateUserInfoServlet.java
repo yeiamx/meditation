@@ -66,7 +66,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		}
 		
 		UserInfo userInfo = new UserInfo(password, userId, userName);
-		if (userService.updateUserInfo(userInfo)){
+		if (userService.updateUserInfo(userInfo)){ 
 			out.println("{status:true}");
 		}else {
 			out.print("{status:false}");

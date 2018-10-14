@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mrxia.meditation.MyApplication;
@@ -13,6 +14,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private TextView winterButton;
     private TextView autumnButton;
     private TextView foreastButton;
+    private ImageView backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,17 +28,22 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         winterButton = findViewById(R.id.setting_winter);
         autumnButton = findViewById(R.id.setting_autumn);
         foreastButton = findViewById(R.id.setting_foreast);
+        backButton = findViewById(R.id.setting_back);
     }
 
     public void registerListener(){
         winterButton.setOnClickListener(this);
         autumnButton.setOnClickListener(this);
         foreastButton.setOnClickListener(this);
+        backButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.setting_back:
+                finish();
+                break;
             case R.id.setting_winter:
                 MyApplication.themeImageUrl = MyApplication.resUrlStarter+"/img/xianqi.jpg";
                 break;

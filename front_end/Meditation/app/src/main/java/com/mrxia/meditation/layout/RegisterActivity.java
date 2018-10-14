@@ -83,11 +83,11 @@ public class RegisterActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    final String resultStr = response.body().string();
-                    final JSONObject resJsonObj = JSONObject.parseObject(resultStr);
-                    Log.d("mrxiaa", resultStr);
-
                     try {
+                        final String resultStr = response.body().string();
+                        Log.d("mrxiaa", "info:"+resultStr);
+                        final JSONObject resJsonObj = JSONObject.parseObject(resultStr);
+
                         if (resJsonObj.getString("status").equals("true")){
                             RegisterActivity.this.runOnUiThread(new Runnable() {
                                 @Override

@@ -18,7 +18,6 @@ import com.mrxia.meditation.R;
 import com.mrxia.meditation.layout.article.ArticleFragment;
 import com.mrxia.meditation.layout.home.HomeFragment;
 import com.mrxia.meditation.layout.meditation.MeditationFragment;
-import com.mrxia.meditation.layout.music.MusicFrament;
 import com.mrxia.meditation.profile.ProfileFragment;
 
 import java.util.ArrayList;

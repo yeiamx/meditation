@@ -1,6 +1,8 @@
 package com.mrxia.meditation.layout.meditation;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.Notification;
+import com.mrxia.meditation.layout.music.MusicPlayActivity;
 import com.mrxia.meditation.utils.ActivityUtil;
 import com.mrxia.meditation.utils.ItemClickListener;
 import com.squareup.picasso.Picasso;
@@ -64,7 +68,13 @@ public class ContentRecyclerAdapter extends RecyclerView.Adapter<ContentRecycler
             hor_recyclerview.addOnItemTouchListener(new ItemClickListener(hor_recyclerview, new ItemClickListener.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    ActivityUtil.showToast(context, verposition+":"+position);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("path", MyApplication.resUrlStarter+"/music/zerogravity.mp3");
+                    Intent intent = new Intent();
+                    //绑定需要传递的参数
+                    intent.putExtras(bundle);
+                    intent.setClass(context, MusicPlayActivity.class);
+                    context.startActivity(intent);
                 }
 
                 @Override
