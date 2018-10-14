@@ -7,6 +7,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -14,11 +15,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.mrxia.meditation.R;
+import com.mrxia.meditation.utils.LoadingView;
 
 import java.io.IOException;
 
 
-public class MusicPlayActivity extends Activity {
+public class MusicPlayActivity extends AppCompatActivity {
     private Bundle bundle;
     //取得歌词View对象
     // private LrcView LrcViewId;
@@ -51,6 +53,7 @@ public class MusicPlayActivity extends Activity {
     //  private int bufferTime = 0;     //歌曲缓存。
     public static boolean SEEK_BAR_STATE = true; //默认不是滑动状态
     private String musicPath;
+    private LoadingView loadingView;
 
     @Override
     public void takeKeyEvents(boolean get) {
@@ -80,6 +83,7 @@ public class MusicPlayActivity extends Activity {
         totleText = findViewById(R.id.totleText);
         seekBar = findViewById(R.id.seekBar);
         findViewById(R.id.rl_SeekBar).setFocusableInTouchMode(true);
+        loadingView = new LoadingView(this, R.style.CustomDialog);
     }
 
     private void registerListener() {
@@ -102,12 +106,14 @@ public class MusicPlayActivity extends Activity {
         // 设置音频流的类型
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         // 通过异步的方式装载媒体资源
+        loadingView.show();
         mediaPlayer.prepareAsync();
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 // 装载完毕 开始播放流媒体
                 mediaPlayer.start();
+                loadingView.dismiss();
             }
         });
         // 设置循环播放
