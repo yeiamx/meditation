@@ -38,7 +38,7 @@ insert into notification(id,title,content) value (5,"怎样开始冥想(上)","�
 \n\n
 刚开始时，你可以尝试四五分钟冥想一下，然后休息一分钟的简短时段。Rinpoche 写道：“常常我们休息时冥想才真正开始”。无论是祷告还是冥想，将这一习惯安排在每日的固定时间也是有好处的。圣本笃会的修士兼作家David Steindl-Rast推荐比平常早起15分钟，给每天创造一个“沉思时刻”。如果没有这些宝贵的时刻，如他所说，“你的一整天将陷入一种盲目的追赶，”一旦拥有它们，你的一整天便会赋予意义和喜悦。
 \n\n
-在下篇文章《怎样开始冥想（下）》，我们将介绍四种练习冥想的基本方法和更多的冥想将带来的好处。");*/
+在下篇文章《怎样开始冥想（下）》，我们将介绍四种练习冥想的基本方法和更多的冥想将带来的好处。");
 
 insert into notification(id,title,content) value (6,"怎样开始冥想(下)","   本文原文来自  HowStuffWorks，译者 Ilyn Jia，Anonymousor。
 \n\n
@@ -107,6 +107,6 @@ Dwelling in the present moment, I breathe in. (Being present) Enjoying the prese
 \n\n
 Aware of my stable posture, I breathe in. (Stable posture) Enjoying the stability, I breathe out. (Enjoying)
 \n\n
-感知我稳定的体态，我吸入空气（保持姿势）。享受这种稳定感，我呼出空气（享受）。");
+感知我稳定的体态，我吸入空气（保持姿势）。享受这种稳定感，我呼出空气（享受）。");*/
 
 

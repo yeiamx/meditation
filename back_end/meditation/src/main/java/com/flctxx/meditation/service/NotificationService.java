@@ -22,6 +22,7 @@ public class NotificationService {
 		//This should be use static resource.
 		articleIds.add("5");
 		articleIds.add("6");
+		articleIds.add("7");
 	}
 	
 	public List<Notification> getNotificationById(String id) {

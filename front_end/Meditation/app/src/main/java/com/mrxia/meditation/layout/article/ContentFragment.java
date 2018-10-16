@@ -10,39 +10,40 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.mrxia.meditation.R;
-import com.mrxia.meditation.bean.Article;
+import com.mrxia.meditation.bean.Notification;
+import com.mrxia.meditation.utils.HttpUtil;
+import com.mrxia.meditation.utils.LoadingView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
+import static com.mrxia.meditation.MyApplication.urlStarter;
 
 public class ContentFragment extends Fragment {
     private RecyclerView rv;
     private DividerItemDecoration mDividerItemDecoration;
     private ContentAdapter mAdapter;
-    private List<Article> mDataList;
+    private List<Notification> mDataList;
+    private List<Notification> articles;
+    private LoadingView loadingView;
 
     public static ContentFragment newInstance() {
         ContentFragment frag = new ContentFragment();
         return frag;
-    }
-
-    public void initData(){
-        this.mDataList = new ArrayList<Article>();
-        for(int i=0;i<20;i++){
-            if(i % 3 == 0){
-            mDataList.add(new Article(""+i, getResources().getString(R.string.example_article_title), getResources().getString(R.string.example_article_content), R.drawable.content1));
-            }else if(i % 3 ==1){
-                mDataList.add(new Article(""+i, getResources().getString(R.string.example_article_title_1), getResources().getString(R.string.example_article_content_1), R.drawable.content2));
-            }else {
-                mDataList.add(new Article(""+i, "meditation", "meditation", R.drawable.article_1));
-            }
-        }
     }
 
     @Override
@@ -50,10 +51,18 @@ public class ContentFragment extends Fragment {
                              Bundle savedInstanceState) {
         // 1. 加载布局，第三个参数必须为`false`，否则会加载两次布局并且抛出异常！！
         View view = inflater.inflate(R.layout.fragment_article_content, container, false);
-        initData();
         initView(view);
         registerListener();
+        initData();
+
         return view;
+    }
+
+    public void initData(){
+        mDataList = new ArrayList<Notification>();
+        loadingView = new LoadingView(getContext());
+        loadingView.show();
+        getArticles();
     }
 
     public void registerListener(){
@@ -63,15 +72,42 @@ public class ContentFragment extends Fragment {
     public void initView(View view){
         rv = view.findViewById(R.id.article_content_rv);
         rv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
-
-//        mDividerItemDecoration = new DividerItemDecoration(rv.getContext(),
-//                new LinearLayoutManager(this.getActivity()).getOrientation());
-//        rv.addItemDecoration(mDividerItemDecoration);
         rv.addItemDecoration(new MyDecoration());
-        mAdapter = new ContentAdapter(this.getActivity(), this.mDataList);
-        rv.setAdapter(mAdapter);
-        //mAdapter.
+    }
 
+    public void getArticles(){
+        articles = new ArrayList<>();
+
+        String url = urlStarter + "/getNotification";
+        String type="article";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("type", type);
+        String paramaters = JSONObject.toJSONString(jsonObject);
+        Log.d("mrxiaa", "using url " + url);
+
+        HttpUtil.postJson_asynch(url, paramaters, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("mrxiaa", e.getMessage());
+                e.printStackTrace();
+                loadingView.dismiss();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resultStr = response.body().string();
+                Log.d("mrxiaa", resultStr);
+                articles = JSONArray.parseArray(resultStr, Notification.class);
+                loadingView.dismiss();
+
+                for (int i=0; i<20; i++){
+                    int num = i%2;
+                    mDataList.add(articles.get(num));
+                }
+                mAdapter = new ContentAdapter(getActivity(), mDataList);
+                rv.setAdapter(mAdapter);
+            }
+        });
 
     }
 

@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mrxia.meditation.R;
+import com.squareup.picasso.Picasso;
 
 public class ArticleContentActivity extends AppCompatActivity {
-
     private TextView tv_title;
     private TextView tv_head;
     private TextView tv_content;
@@ -41,7 +41,7 @@ public class ArticleContentActivity extends AppCompatActivity {
         String id = extras.getString("id");
         String title = extras.getString("title");
         String content = extras.getString("content");
-        int image = extras.getInt("image");
+        String image = extras.getString("image");
 
         tv_title = findViewById(R.id.article_content_title);
         tv_title.setText(title);
@@ -51,7 +51,7 @@ public class ArticleContentActivity extends AppCompatActivity {
         //tv_content.setMovementMethod(new ScrollingMovementMethod());
 
         iv_image = findViewById(R.id.article_content_image);
-        iv_image.setImageResource(image);
+        Picasso.with(this).load(image).into(iv_image);
 
         iv_back = findViewById(R.id.article_content_back);
         iv_back.setOnClickListener(new View.OnClickListener() {
