@@ -24,10 +24,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener{
-
     private List<Fragment> fragments;
     private List<String> fragmentTags;
     private Fragment mContent;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +50,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         navigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
         navigationBar.setBarBackgroundColor(R.color.transparent);
 
-        navigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "主页")
+        navigationBar.addItem(new BottomNavigationItem(R.mipmap.home, "主页")
                 .setActiveColorResource(R.color.bottom_active))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "冥想")
+                .addItem(new BottomNavigationItem(R.mipmap.lotus_flower_gray, "冥想")
                         .setActiveColorResource(R.color.bottom_active))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "文章")
+                .addItem(new BottomNavigationItem(R.mipmap.article, "文章")
                         .setActiveColorResource(R.color.bottom_active))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "档案")
+                .addItem(new BottomNavigationItem(R.mipmap.profile, "档案")
                         .setActiveColorResource(R.color.bottom_active))
                 .setFirstSelectedPosition(0)//默认选择索引为0的菜单
                 .initialise();//对导航进行重绘

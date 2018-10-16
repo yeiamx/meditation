@@ -5,9 +5,7 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,19 +35,24 @@ public class ArticleContentActivity extends AppCompatActivity {
         Typeface typeface = Typeface.createFromAsset(ArticleContentActivity.this.getAssets(), "fonts/segoe_script.ttf");
         tv_head.setTypeface(typeface);
         tv_head.setText("Article");
+
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         String id = extras.getString("id");
         String title = extras.getString("title");
         String content = extras.getString("content");
         int image = extras.getInt("image");
+
         tv_title = findViewById(R.id.article_content_title);
         tv_title.setText(title);
+
         tv_content = findViewById(R.id.article_content_content);
         tv_content.setText(content);
         //tv_content.setMovementMethod(new ScrollingMovementMethod());
+
         iv_image = findViewById(R.id.article_content_image);
         iv_image.setImageResource(image);
+
         iv_back = findViewById(R.id.article_content_back);
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,10 +60,8 @@ public class ArticleContentActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
     protected void setHalfTransparent() {
-
         if (Build.VERSION.SDK_INT >= 21) {//21表示5.0
             View decorView = getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
@@ -73,7 +74,4 @@ public class ArticleContentActivity extends AppCompatActivity {
             // getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
     }
-
-
-
 }

@@ -4,18 +4,24 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.Image;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.utils.LoadingView;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.IOException;
 
@@ -43,9 +49,7 @@ public class MusicPlayActivity extends AppCompatActivity {
     private TextView currentText;   //当前时间View
     private TextView totleText;   //歌曲总时间View
     private SeekBar seekBar;     //歌曲播放进度
-    private String url;
-    private String songs;
-    private String author;
+
     /*
     设定音乐播放相关属性
      */
@@ -54,6 +58,7 @@ public class MusicPlayActivity extends AppCompatActivity {
     public static boolean SEEK_BAR_STATE = true; //默认不是滑动状态
     private String musicPath;
     private LoadingView loadingView;
+    private ImageView background;
 
     @Override
     public void takeKeyEvents(boolean get) {
@@ -72,9 +77,13 @@ public class MusicPlayActivity extends AppCompatActivity {
         initView();
         play();
         registerListener();
+        setHalfTransparent();
     }
 
     private void initView() {
+        background = findViewById(R.id.music_background);
+        ImageLoader.getInstance().displayImage(MyApplication.themeImageUrl, background);
+
         imagePlay = findViewById(R.id.imagePlay);
         imageNext = findViewById(R.id.imageNext);
         imagePre = findViewById(R.id.imagePre);
@@ -140,17 +149,17 @@ public class MusicPlayActivity extends AppCompatActivity {
     protected void pause() {
         if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
             mediaPlayer.start();
-            Log.d("mrxiaa", "start!");
+            //Log.d("mrxiaa", "start!");
             imagePlay.setImageResource(R.mipmap.music_pause);
-            Log.d("mrxiaa", "to pause");
+            //Log.d("mrxiaa", "to pause");
 
             return;
         }
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
-            Log.d("mrxiaa", "pause!");
+            //Log.d("mrxiaa", "pause!");
             imagePlay.setImageResource(R.mipmap.music_play);
-            Log.d("mrxiaa", "to play");
+            //Log.d("mrxiaa", "to play");
         }
     }
 
@@ -160,6 +169,14 @@ public class MusicPlayActivity extends AppCompatActivity {
             return;
         }
         play();
+    }
+
+    protected void stop() {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
     @Override
@@ -173,12 +190,30 @@ public class MusicPlayActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        pause();
+    }
 
-    protected void stop() {
-        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-            mediaPlayer.stop();
-            mediaPlayer.release();
-            mediaPlayer = null;
+    @Override
+    public void onResume() {
+        super.onResume();
+        pause();
+    }
+
+
+    protected void setHalfTransparent() {
+        if (Build.VERSION.SDK_INT >= 21) {//21表示5.0
+            View decorView = getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+        } else if (Build.VERSION.SDK_INT >= 19) {//19表示4.4
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //虚拟键盘也透明
+            // getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
     }
 }

@@ -32,7 +32,6 @@ public class ContentFragment extends Fragment {
         return frag;
     }
 
-
     public void initData(){
         this.mDataList = new ArrayList<Article>();
         for(int i=0;i<20;i++){

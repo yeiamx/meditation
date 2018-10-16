@@ -24,6 +24,8 @@ public class MyApplication extends Application {
     }
 
     private void initImageLoader(){
+        themeImageUrl = MyApplication.resUrlStarter+"/img/xianqi.jpg";
+
         //创建默认的ImageLoader配置参数
         ImageLoaderConfiguration configuration = new ImageLoaderConfiguration.Builder(this)
                 .writeDebugLogs() //打印log信息

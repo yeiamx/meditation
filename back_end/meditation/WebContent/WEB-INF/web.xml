@@ -23,7 +23,6 @@
     <servlet-name>updateUserInfoServlet</servlet-name>
     <url-pattern>/updateUserInfo</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>getUserInfoServlet</servlet-name>
     <servlet-class>com.flctxx.meditation.servlet.GetUserInfoServlet</servlet-class>
@@ -32,7 +31,6 @@
     <servlet-name>getUserInfoServlet</servlet-name>
     <url-pattern>/getUserInfo</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>loginServlet</servlet-name>
     <servlet-class>com.flctxx.meditation.servlet.LoginServlet</servlet-class>
@@ -41,8 +39,6 @@
     <servlet-name>loginServlet</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
-  
-  
   <filter>
     <filter-name>encodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

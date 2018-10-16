@@ -17,8 +17,7 @@
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:background="@drawable/head_underline"
-    />
+        android:background="@drawable/head_underline" />
         <ImageView
             android:id="@+id/article_content_back"
             android:layout_width="50dp"
@@ -33,12 +32,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
     <TextView
         android:id="@+id/article_content_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
         android:textSize="30sp"
+        android:gravity="center"
         android:fontFamily="serif"
         android:layout_marginTop="10dp"
         android:textStyle="bold"/>
@@ -55,8 +56,8 @@
         android:textSize="18sp"
         android:fontFamily="monospace"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-/>
+        android:layout_marginBottom="10dp" />
+
     </LinearLayout>
 </ScrollView>
 </LinearLayout>
