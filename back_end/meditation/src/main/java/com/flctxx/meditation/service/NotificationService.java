@@ -12,11 +12,16 @@ public class NotificationService {
 	private String tableName = "com.flctxx.meditation.bean.Notification";
 	BaseDAO dao = new BaseDAO();
 	private List articleIds;
+	private List musicIds;
 	
 	
 	public NotificationService(){
 		articleIds = new ArrayList();
+		musicIds = new ArrayList();
+		
+		//This should be use static resource.
 		articleIds.add("5");
+		articleIds.add("6");
 	}
 	
 	public List<Notification> getNotificationById(String id) {
@@ -28,6 +33,17 @@ public class NotificationService {
 		List<Notification> res = new ArrayList();
 		for (Notification notification : totalRes){
 			if (articleIds.contains(notification.getId())){
+				res.add(notification);
+			}
+		}
+		
+		return res;
+	}
+	public List<Notification> getMusicNotification(){
+		List<Notification> totalRes = dao.listAll(tableName);
+		List<Notification> res = new ArrayList();
+		for (Notification notification : totalRes){
+			if (musicIds.contains(notification.getId())){
 				res.add(notification);
 			}
 		}

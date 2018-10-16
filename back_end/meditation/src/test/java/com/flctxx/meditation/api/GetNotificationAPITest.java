@@ -33,9 +33,12 @@ public class GetNotificationAPITest extends AbstractTest{
 	
 	@Test
 	public void Test1() {
+		JSONObject idObject = new JSONObject();
+		idObject.put("type", "article");
+		String jsonString = JSON.toJSONString(idObject);
 		postUrl = urlStarter + "/getNotification";
 		
-		String resJsonString = NetworkUtility.doPostRequest(postUrl);
+		String resJsonString = NetworkUtility.postJson(postUrl, jsonString);
 		logger.info(resJsonString);
 		List<Notification> resArray = JSON.parseArray(resJsonString, Notification.class);
 		assertTrue(resArray.size()>0);
