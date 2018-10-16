@@ -7,6 +7,6 @@
 <title>Hello</title>
 </head>
 <body>
-This is v0.0.1
+This is v0.0.2
 </body>
 </html>

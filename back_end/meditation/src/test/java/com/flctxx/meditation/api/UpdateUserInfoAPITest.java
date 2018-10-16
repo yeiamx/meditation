@@ -25,7 +25,6 @@ public class UpdateUserInfoAPITest extends AbstractTest{
 		String resJsonString = NetworkUtility.postJson(postUrl, jsonString);
 		JSONObject resJsonObject = (JSONObject) JSONObject.parse(resJsonString);
 		assertTrue(resJsonObject.getString("status").equals("true"));
-		
 	}
 	
 	@Test

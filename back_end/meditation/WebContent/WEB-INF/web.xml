@@ -8,6 +8,15 @@
     <param-value>925166340@qq.com</param-value>
   </context-param>
   <servlet>
+    <servlet-name>GetNotificationServlet</servlet-name>
+    <servlet-class>com.flctxx.meditation.servlet.GetNotificationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetNotificationServlet</servlet-name>
+    <url-pattern>/getNotification</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
     <servlet-name>HomeNotificationServlet</servlet-name>
     <servlet-class>com.flctxx.meditation.servlet.HomeNotificationServlet</servlet-class>
   </servlet>

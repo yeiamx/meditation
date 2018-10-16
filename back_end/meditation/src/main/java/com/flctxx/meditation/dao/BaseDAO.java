@@ -119,8 +119,23 @@ public class BaseDAO<T> {
 	   } finally {
 	        session.getTransaction().commit();
 	        session.close();
+	   }
    }
-    }
+    
+    public List<T> listAll(String tableName){
+        Session session = SessionFactoryHelper.getSessionFactory().openSession();
+        try{
+	        session.beginTransaction();
+	            
+	        String hql = "from " + tableName;     
+	        Query q = session.createQuery(hql) ;     
+	        
+	        return q.list();
+	   } finally {
+	        session.getTransaction().commit();
+	        session.close();
+	   }
+   }
     
     public List<T> list(String hql) {
         Session session = SessionFactoryHelper.getSessionFactory().openSession();
