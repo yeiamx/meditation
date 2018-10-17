@@ -60,7 +60,7 @@ public class ContentFragment extends Fragment {
 
     public void initData(){
         mDataList = new ArrayList<Notification>();
-        loadingView = new LoadingView(getContext());
+        loadingView = new LoadingView(getActivity(), R.style.CustomDialog);
         loadingView.show();
         getArticles();
     }
@@ -101,11 +101,16 @@ public class ContentFragment extends Fragment {
                 loadingView.dismiss();
 
                 for (int i=0; i<20; i++){
-                    int num = i%2;
+                    int num = i%3;
                     mDataList.add(articles.get(num));
                 }
                 mAdapter = new ContentAdapter(getActivity(), mDataList);
-                rv.setAdapter(mAdapter);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        rv.setAdapter(mAdapter);
+                    }
+                });
             }
         });
 

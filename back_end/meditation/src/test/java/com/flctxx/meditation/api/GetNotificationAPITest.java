@@ -27,7 +27,7 @@ public class GetNotificationAPITest extends AbstractTest{
 		//logger.info(resJsonString);
 		List<Notification> resArray = JSON.parseArray(resJsonString, Notification.class);
 		assertTrue(resArray.size()>0);
-		assertTrue(resArray.get(0).getTitle().equals("Notification"));	
+		//assertTrue(resArray.get(0).getTitle().equals("Notification"));	
 	}
 	
 	
@@ -41,7 +41,7 @@ public class GetNotificationAPITest extends AbstractTest{
 		String resJsonString = NetworkUtility.postJson(postUrl, jsonString);
 		logger.info(resJsonString);
 		List<Notification> resArray = JSON.parseArray(resJsonString, Notification.class);
-		assertTrue(resArray.size()>0);
+		assertTrue(resArray.size()==3);
 		//assertTrue(resArray.get(0).getTitle().equals("Notification"));	
 	}
 	
