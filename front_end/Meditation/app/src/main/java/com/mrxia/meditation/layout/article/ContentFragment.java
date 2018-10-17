@@ -60,7 +60,6 @@ public class ContentFragment extends Fragment {
 
     public void initData(){
         mDataList = new ArrayList<Notification>();
-        loadingView = new LoadingView(getActivity(), R.style.CustomDialog);
         loadingView.show();
         getArticles();
     }
@@ -70,6 +69,8 @@ public class ContentFragment extends Fragment {
     }
 
     public void initView(View view){
+        loadingView = new LoadingView(getActivity(), R.style.CustomDialog);
+
         rv = view.findViewById(R.id.article_content_rv);
         rv.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         rv.addItemDecoration(new MyDecoration());

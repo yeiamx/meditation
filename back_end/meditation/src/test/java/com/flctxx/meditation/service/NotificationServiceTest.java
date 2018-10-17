@@ -1,6 +1,7 @@
 package com.flctxx.meditation.service;
 
 import com.flctxx.meditation.AbstractTest;
+
 import com.flctxx.meditation.bean.Notification;
 
 import static org.junit.Assert.assertTrue;
@@ -31,6 +32,13 @@ public class NotificationServiceTest extends AbstractTest{
 		List<Notification> notifications = notificationService.getArticleNotification();
 		logger.info(notifications.get(0).getContent());
 		assertTrue(notifications.size()>0);
+		//assertTrue(notifications.get(0).getTitle().equals("Notification"));
+	}
+	
+	@Test
+	public void test3() {
+		logger.info(notificationService.articleIds.get(2));
+		assertTrue(notificationService.articleIds.size()>0);
 		//assertTrue(notifications.get(0).getTitle().equals("Notification"));
 	}
 	

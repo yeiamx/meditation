@@ -13,7 +13,6 @@ import android.view.WindowManager;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
-import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.layout.article.ArticleFragment;
 import com.mrxia.meditation.layout.home.HomeFragment;
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private List<Fragment> fragments;
     private List<String> fragmentTags;
     private Fragment mContent;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,19 +43,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     private void initView() {
         BottomNavigationBar navigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
 
-        navigationBar.setMode(BottomNavigationBar.MODE_FIXED);
+        navigationBar.setMode(BottomNavigationBar.MODE_SHIFTING);
 
-        navigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_STATIC);
+        navigationBar.setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_DEFAULT);
         navigationBar.setBarBackgroundColor(R.color.transparent);
+        navigationBar.setBarBackgroundColor(R.color.white);
 
         navigationBar.addItem(new BottomNavigationItem(R.mipmap.home, "主页")
-                .setActiveColorResource(R.color.bottom_active))
+                .setActiveColorResource(R.color.darkpurple))
                 .addItem(new BottomNavigationItem(R.mipmap.lotus_flower_gray, "冥想")
-                        .setActiveColorResource(R.color.bottom_active))
+                        .setActiveColorResource(R.color.colorPrimary))
                 .addItem(new BottomNavigationItem(R.mipmap.article, "文章")
-                        .setActiveColorResource(R.color.bottom_active))
+                        .setActiveColorResource(R.color.blackGray))
                 .addItem(new BottomNavigationItem(R.mipmap.profile, "档案")
-                        .setActiveColorResource(R.color.bottom_active))
+                        .setActiveColorResource(R.color.theme_blue))
                 .setFirstSelectedPosition(0)//默认选择索引为0的菜单
                 .initialise();//对导航进行重绘
 
