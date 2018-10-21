@@ -1,10 +1,8 @@
 package com.mrxia.meditation.layout.music;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.media.AudioManager;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -24,20 +21,15 @@ import com.mrxia.meditation.utils.LoadingView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MusicPlayActivity extends AppCompatActivity {
-    private Bundle bundle;
-    //取得歌词View对象
-    // private LrcView LrcViewId;
-    //   //播放音乐对象
     private MediaPlayer mediaPlayer = null;
-    //当前播放时间
-    public static int currentTime;
-    //音乐时常
-    private int duration;
-    //用来判断播放控制器是否被点击
-    private static boolean AUDIO_STATE = false;
+    private Timer mTimer;
+    private TimerTask mTimerTask;
+    private boolean isChanging=false;//互斥变量，防止定时器与SeekBar拖动时进度冲突
 
     //声明布局文件
     private TextView MusicName;
@@ -50,11 +42,6 @@ public class MusicPlayActivity extends AppCompatActivity {
     private TextView totleText;   //歌曲总时间View
     private SeekBar seekBar;     //歌曲播放进度
 
-    /*
-    设定音乐播放相关属性
-     */
-    private int durationTime = 0;   ///歌曲 总时间
-    //  private int bufferTime = 0;     //歌曲缓存。
     public static boolean SEEK_BAR_STATE = true; //默认不是滑动状态
     private String musicPath;
     private LoadingView loadingView;
@@ -69,7 +56,7 @@ public class MusicPlayActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.music_detail_layout);
+        setContentView(R.layout.activity_music_play);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         Intent intent = getIntent();
         musicPath = intent.getStringExtra("path");
@@ -102,6 +89,23 @@ public class MusicPlayActivity extends AppCompatActivity {
                 pause();
             }
         });
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                isChanging=true;
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress());
+                isChanging=false;
+            }
+        });
     }
 
     protected void play() {
@@ -122,7 +126,10 @@ public class MusicPlayActivity extends AppCompatActivity {
             public void onPrepared(MediaPlayer mp) {
                 // 装载完毕 开始播放流媒体
                 mediaPlayer.start();
-                loadingView.dismiss();
+                seekBar.setMax(mediaPlayer.getDuration());//设置进度条
+                setTimer();
+                if (loadingView!=null)
+                    loadingView.dismiss();
             }
         });
         // 设置循环播放
@@ -144,6 +151,20 @@ public class MusicPlayActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    protected void setTimer(){
+        mTimer = new Timer();
+        mTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if(isChanging) {
+                    return;
+                }
+                seekBar.setProgress(mediaPlayer.getCurrentPosition());
+            }
+        };
+        mTimer.schedule(mTimerTask, 0, 10);
     }
 
     protected void pause() {
@@ -182,12 +203,9 @@ public class MusicPlayActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         // 在activity结束的时候回收资源
-        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-            mediaPlayer.stop();
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
         super.onDestroy();
+        stop();
+
     }
 
     @Override
@@ -201,7 +219,6 @@ public class MusicPlayActivity extends AppCompatActivity {
         super.onResume();
         pause();
     }
-
 
     protected void setHalfTransparent() {
         if (Build.VERSION.SDK_INT >= 21) {//21表示5.0

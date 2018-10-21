@@ -60,7 +60,7 @@ public class ContentRecyclerAdapter extends RecyclerView.Adapter<ContentRecycler
             hor_recyclerview = itemView.findViewById(R.id.meditation_ver_item);
         }
 
-        private void refreshData(List<Notification> data, final int verposition){
+        private void refreshData(final List<Notification> data, final int verposition){
             ViewGroup.LayoutParams layoutParams = hor_recyclerview.getLayoutParams();
             layoutParams.height =dip2px(200, context);
             hor_recyclerview.setLayoutParams(layoutParams);
@@ -69,7 +69,7 @@ public class ContentRecyclerAdapter extends RecyclerView.Adapter<ContentRecycler
                 @Override
                 public void onItemClick(View view, int position) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("path", MyApplication.resUrlStarter+"/music/zerogravity.mp3");
+                    bundle.putString("path", data.get(position).getResUrl());
                     Intent intent = new Intent();
                     //绑定需要传递的参数
                     intent.putExtras(bundle);

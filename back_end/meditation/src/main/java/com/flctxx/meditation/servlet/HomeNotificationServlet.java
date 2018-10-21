@@ -21,7 +21,7 @@ import com.flctxx.meditation.utils.NetworkUtility;
 
 public class HomeNotificationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private NotificationService notificationService = new NotificationService();
+	private NotificationService notificationService;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -45,6 +45,8 @@ public class HomeNotificationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.setContentType("application/json;charset=UTF-8");
+		 notificationService= new NotificationService();
+		
 		PrintWriter out = response.getWriter();
 		String jsonString = NetworkUtility.exhaustBufferedReader(request.getReader());
 		JSONObject parameters = JSON.parseObject(jsonString);

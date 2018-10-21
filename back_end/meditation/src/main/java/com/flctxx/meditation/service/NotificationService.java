@@ -72,7 +72,7 @@ public class NotificationService {
             logger.info("articles: " + articleStr);
         } catch (IOException e) {
             e.printStackTrace();
-            musicStr = "";
+            musicStr = "50";
             articleStr = "5,6,7";
             logger.info("configuration file is not found, " +
                     "using default article:5,6,7");

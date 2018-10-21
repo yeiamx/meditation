@@ -76,7 +76,9 @@ public class ContentFragment extends Fragment {
             public void onFailure(Call call, IOException e) {
                 Log.d("mrxiaa", e.getMessage());
                 e.printStackTrace();
-                loadingView.dismiss();
+                if (loadingView!=null) {
+                    loadingView.dismiss();
+                }
             }
 
             @Override
@@ -84,9 +86,11 @@ public class ContentFragment extends Fragment {
                 String resultStr = response.body().string();
                 Log.d("mrxiaa", resultStr);
                 music = JSONArray.parseArray(resultStr, Notification.class);
-                loadingView.dismiss();
+                if (loadingView!=null) {
+                    loadingView.dismiss();
+                }
 
-                for (int i=0; i<6; i++){
+                for (int i=0; i<5; i++){
                     int num = i%music.size();
                     data.add(music.get(num));
                 }
@@ -120,8 +124,5 @@ public class ContentFragment extends Fragment {
                 return "类别"+String.valueOf(position);
             }
         }));
-
-        adapter = new ContentRecyclerAdapter(getActivity(), data);
-        recyclerView.setAdapter(adapter);
     }
 }

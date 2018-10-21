@@ -91,7 +91,9 @@ public class ContentFragment extends Fragment {
             public void onFailure(Call call, IOException e) {
                 Log.d("mrxiaa", e.getMessage());
                 e.printStackTrace();
-                loadingView.dismiss();
+                if (loadingView!=null) {
+                    loadingView.dismiss();
+                }
             }
 
             @Override
@@ -99,7 +101,8 @@ public class ContentFragment extends Fragment {
                 String resultStr = response.body().string();
                 Log.d("mrxiaa", resultStr);
                 articles = JSONArray.parseArray(resultStr, Notification.class);
-                loadingView.dismiss();
+                if (loadingView!=null)
+                    loadingView.dismiss();
 
                 for (int i=0; i<20; i++){
                     int num = i%3;

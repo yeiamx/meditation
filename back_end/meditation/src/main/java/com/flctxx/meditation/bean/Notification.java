@@ -20,6 +20,17 @@ public class Notification {
     
     @Column(name = "img_url")
     private String imgUrl;
+    
+    @Column(name = "res_url")
+    private String resUrl;
+    
+	public String getResUrl() {
+		return resUrl;
+	}
+
+	public void setResUrl(String resUrl) {
+		this.resUrl = resUrl;
+	}
 
 	public String getId() {
 		return id;
@@ -59,6 +70,15 @@ public class Notification {
 		this.title = title;
 		this.content = content;
 		this.imgUrl = imgUrl;
+	}
+	
+	public Notification(String id, String title, String content, String imgUrl, String resUrl) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.imgUrl = imgUrl;
+		this.resUrl = resUrl;
 	}
 	
 	public Notification() {

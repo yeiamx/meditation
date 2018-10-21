@@ -41,10 +41,23 @@ public class GetNotificationAPITest extends AbstractTest{
 		String resJsonString = NetworkUtility.postJson(postUrl, jsonString);
 		logger.info(resJsonString);
 		List<Notification> resArray = JSON.parseArray(resJsonString, Notification.class);
-		assertTrue(resArray.size()==3);
+		assertTrue(resArray.size()>0);
 		//assertTrue(resArray.get(0).getTitle().equals("Notification"));	
 	}
 	
+	@Test
+	public void Test2() {
+		JSONObject idObject = new JSONObject();
+		idObject.put("type", "music");
+		String jsonString = JSON.toJSONString(idObject);
+		postUrl = urlStarter + "/getNotification";
+		
+		String resJsonString = NetworkUtility.postJson(postUrl, jsonString);
+		logger.info(resJsonString);
+		List<Notification> resArray = JSON.parseArray(resJsonString, Notification.class);
+		assertTrue(resArray.size()>0);
+		//assertTrue(resArray.get(0).getTitle().equals("Notification"));	
+	}
 	
 	private static final Logger logger = Logger.getLogger(GetNotificationAPITest.class);
 }

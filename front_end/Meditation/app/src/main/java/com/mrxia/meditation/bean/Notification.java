@@ -5,6 +5,15 @@ public class Notification {
     private String title;
     private String content;
     private String imgUrl;
+    private String resUrl;
+
+    public String getResUrl() {
+        return resUrl;
+    }
+
+    public void setResUrl(String resUrl) {
+        this.resUrl = resUrl;
+    }
 
     public String getId() {
         return id;
@@ -45,6 +54,16 @@ public class Notification {
         this.content = content;
         this.imgUrl = imgUrl;
     }
+
+    public Notification(String id, String title, String content, String imgUrl, String resUrl) {
+        super();
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.imgUrl = imgUrl;
+        this.resUrl = resUrl;
+    }
+
     public Notification() {
 
     }
