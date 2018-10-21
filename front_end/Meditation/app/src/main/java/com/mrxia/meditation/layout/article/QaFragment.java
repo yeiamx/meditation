@@ -31,8 +31,14 @@ public class QaFragment extends Fragment {
 
     public void initData(){
         this.mDataList = new ArrayList<Qa>();
-        for(int i=0;i<20;i++){
-                mDataList.add(new Qa(""+i, "question "+i, "answer "+i));
+        for(int i=0;i<3;i++){
+            if(i==0)
+                mDataList.add(new Qa(""+i, getResources().getString(R.string.question_1), getResources().getString(R.string.answer_1)));
+            else if(i==1)
+                mDataList.add(new Qa(""+i, getResources().getString(R.string.question_2), getResources().getString(R.string.answer_2)));
+            else if(i==2)
+                mDataList.add(new Qa(""+i, getResources().getString(R.string.question_3), getResources().getString(R.string.answer_3)));
+
         }
     }
 

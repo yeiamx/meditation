@@ -60,7 +60,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
             textView.setText(mDataList.get(position).getTitle());
             Picasso
                     .with(mContext)
-                    .load(MyApplication.themeImageUrl)
+                    .load(mDataList.get(position).getImgUrl())
                     .into(imageView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,8 +71,8 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
                     bundle.putString("id", mDataList.get(position).getId() );
                     bundle.putString("title", mDataList.get(position).getTitle());
                     bundle.putString("content", mDataList.get(position).getContent());
-                    bundle.putString("image", MyApplication.themeImageUrl);
-                    //bundle.putString("image", mDataList.get(position).getImgUrl());
+                    //bundle.putString("image", MyApplication.themeImageUrl);
+                    bundle.putString("image", mDataList.get(position).getImgUrl());
                     intent.putExtras(bundle);
                     view.getContext().startActivity(intent);
                 }

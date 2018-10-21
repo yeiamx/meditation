@@ -35,19 +35,20 @@ public class QaAdapter extends RecyclerView.Adapter<QaAdapter.QaViewHolder> {
     public void onBindViewHolder(QaAdapter.QaViewHolder holder, final int position) {
 
         holder.textView.setText(mDataList.get(position).getQuestion());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(mContext, "qa"+position,Toast.LENGTH_SHORT).show();
-               Intent intent = new Intent(view.getContext(), ArticleQaActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("id", mDataList.get(position).getId() );
-                bundle.putString("question", mDataList.get(position).getQuestion());
-                bundle.putString("answer", mDataList.get(position).getAnswer());
-                intent.putExtras(bundle);
-               view.getContext().startActivity(intent);
-            }
-        });
+        holder.answer.setText(mDataList.get(position).getAnswer());
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                //Toast.makeText(mContext, "qa"+position,Toast.LENGTH_SHORT).show();
+//               Intent intent = new Intent(view.getContext(), ArticleQaActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("id", mDataList.get(position).getId() );
+//                bundle.putString("question", mDataList.get(position).getQuestion());
+//                bundle.putString("answer", mDataList.get(position).getAnswer());
+//                intent.putExtras(bundle);
+//               view.getContext().startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -59,10 +60,12 @@ public class QaAdapter extends RecyclerView.Adapter<QaAdapter.QaViewHolder> {
     class QaViewHolder extends RecyclerView.ViewHolder{
 
         private TextView textView;
+        private TextView answer;
 
         public QaViewHolder(View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.article_qa_item_textview);
+            answer = itemView.findViewById(R.id.article_qa_item_textview_1);
 
         }
     }

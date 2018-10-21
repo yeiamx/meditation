@@ -4,22 +4,46 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/article_qa_item_iv"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/q"
-        android:padding="5dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="20dp"
-        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q:"
+        android:textSize="25sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="#716a6a"
+        android:textStyle="bold"/>
     <TextView
         android:id="@+id/article_qa_item_textview"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:textSize="22sp"
-        android:paddingLeft="100dp"
-        android:paddingTop="20dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="55dp"
+        android:text="how are you"
+        android:fontFamily="serif"
+
+        />
+    <TextView
+        android:layout_below="@+id/article_qa_item_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A:"
+        android:textSize="25sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="#716a6a"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_below="@+id/article_qa_item_textview"
+        android:id="@+id/article_qa_item_textview_1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginBottom="50dp"
         android:text="how are you"
         android:fontFamily="serif"
 
