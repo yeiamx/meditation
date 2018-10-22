@@ -24,6 +24,17 @@ public class Notification {
     @Column(name = "res_url")
     private String resUrl;
     
+    @Column(name = "type")
+    private String type;
+    
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public String getResUrl() {
 		return resUrl;
 	}
@@ -79,6 +90,16 @@ public class Notification {
 		this.content = content;
 		this.imgUrl = imgUrl;
 		this.resUrl = resUrl;
+	}
+	
+	public Notification(String id, String title, String content, String imgUrl, String resUrl, String type) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.imgUrl = imgUrl;
+		this.resUrl = resUrl;
+		this.type = type;
 	}
 	
 	public Notification() {
