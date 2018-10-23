@@ -15,10 +15,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.utils.LoadingView;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -39,8 +37,8 @@ public class MusicPlayActivity extends AppCompatActivity {
     private ImageView imageNext;   //下一首歌
     private ImageView imagePre;     //上一首歌
     private ImageView imageSet;     //音乐设置
-    private TextView currentText;   //当前时间View
-    private TextView totleText;   //歌曲总时间View
+    private TextView currentTimeText;   //当前时间View
+    private TextView totalTimeText;   //歌曲总时间View
     private SeekBar seekBar;     //歌曲播放进度
 
     public static boolean SEEK_BAR_STATE = true; //默认不是滑动状态
@@ -77,13 +75,12 @@ public class MusicPlayActivity extends AppCompatActivity {
                 .with(this)
                 .load(backgroundImgUrl)
                 .into(background);
-
         imagePlay = findViewById(R.id.imagePlay);
         imageNext = findViewById(R.id.imageNext);
         imagePre = findViewById(R.id.imagePre);
         imageSet = findViewById(R.id.imageSet);
-        currentText = findViewById(R.id.currentText);
-        totleText = findViewById(R.id.totleText);
+        currentTimeText = findViewById(R.id.currentText);
+        totalTimeText = findViewById(R.id.totalText);
         seekBar = findViewById(R.id.seekBar);
         findViewById(R.id.rl_SeekBar).setFocusableInTouchMode(true);
         loadingView = new LoadingView(this, R.style.CustomDialog);
@@ -98,6 +95,7 @@ public class MusicPlayActivity extends AppCompatActivity {
         });
         mediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
             public void onSeekComplete(MediaPlayer m) {
+                currentTimeText.setText(timeToStr(mediaPlayer.getDuration()));
                 m.start();
                 if (loadingView!=null) {
                     loadingView.dismiss();
@@ -128,7 +126,9 @@ public class MusicPlayActivity extends AppCompatActivity {
             @Override
             public void onPrepared(MediaPlayer mp) {
                 // 装载完毕 开始播放流媒体
-                Log.d("mrxiaa", "prepare over");
+                //Log.d("mrxiaa", "prepare over");
+                totalTimeText.setText(timeToStr(mediaPlayer.getDuration()));
+
                 mediaPlayer.start();
                 seekBar.setMax(mediaPlayer.getDuration());//设置进度条
                 setTimer();
@@ -137,26 +137,6 @@ public class MusicPlayActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    protected void play() {
-        Log.d("mrxiaa", "start playing");
-        mediaPlayer.reset();
-        // 设置指定的流媒体地址
-        try {
-            mediaPlayer.setDataSource(musicPath);
-        } catch (IOException e) {
-            Log.d("mrxiaa", "set wrong");
-            e.printStackTrace();
-        }
-        // 设置音频流的类型
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        // 通过异步的方式装载媒体资源
-        loadingView.show();
-        mediaPlayer.prepareAsync();
-        Log.d("mrxiaa", "start prepare");
-        // 设置循环播放
-        // mediaPlayer.setLooping(true);
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -169,12 +149,32 @@ public class MusicPlayActivity extends AppCompatActivity {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
                 // 如果发生错误，重新播放
-                Log.d("mrxiaa", "error playing...replay");
-                Log.d("mrxiaa", "OnError - Error code: " + what + " Extra code: " + extra);
+                //Log.d("mrxiaa", "error playing...replay");
+                //Log.d("mrxiaa", "OnError - Error code: " + what + " Extra code: " + extra);
                 replay();
                 return false;
             }
         });
+    }
+
+    protected void play() {
+        //Log.d("mrxiaa", "start playing");
+        mediaPlayer.reset();
+        // 设置指定的流媒体地址
+        try {
+            mediaPlayer.setDataSource(musicPath);
+        } catch (IOException e) {
+            //Log.d("mrxiaa", "set wrong");
+            e.printStackTrace();
+        }
+        // 设置音频流的类型
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        // 通过异步的方式装载媒体资源
+        loadingView.show();
+        mediaPlayer.prepareAsync();
+        //Log.d("mrxiaa", "start prepare");
+        // 设置循环播放
+        // mediaPlayer.setLooping(true);
     }
 
     protected void setTimer(){
@@ -186,7 +186,14 @@ public class MusicPlayActivity extends AppCompatActivity {
                     return;
                 }
                 if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-                  seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                    final String musicTimeStr = timeToStr(mediaPlayer.getCurrentPosition());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            currentTimeText.setText(musicTimeStr);
+                        }
+                    });
+                    seekBar.setProgress(mediaPlayer.getCurrentPosition());
                 }
             }
         };
@@ -219,7 +226,9 @@ public class MusicPlayActivity extends AppCompatActivity {
     }
 
     protected void stop() {
-        mTimerTask.cancel();
+        if (mTimerTask!=null) {
+            mTimerTask.cancel();
+        }
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
             mediaPlayer.release();
@@ -259,6 +268,14 @@ public class MusicPlayActivity extends AppCompatActivity {
             //虚拟键盘也透明
             // getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
+    }
+
+    public String timeToStr(int duration){
+        int musicTime = duration / 1000;
+        String mins = musicTime/60<=10?"0"+musicTime/60:""+musicTime/60;
+        String seconds = musicTime%60<=10?"0"+musicTime%60:""+musicTime%60;
+
+        return mins+":"+seconds;
     }
 }
 

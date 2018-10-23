@@ -29,18 +29,34 @@ public class NotificationServiceTest extends AbstractTest{
 	
 	@Test
 	public void test2() {
-		List<Notification> notifications = notificationService.getArticleNotification();
+		List<Notification> notifications = notificationService.getNotification("article");
 		logger.info(notifications.get(0).getContent());
 		assertTrue(notifications.size()>0);
-		//assertTrue(notifications.get(0).getTitle().equals("Notification"));
+		
 	}
 	
 	@Test
 	public void test3() {
-		logger.info(notificationService.articleIds.get(2));
-		assertTrue(notificationService.articleIds.size()>0);
-		//assertTrue(notifications.get(0).getTitle().equals("Notification"));
+		List<Notification> notifications = notificationService.getNotification("music");
+		logger.info(notifications.get(0).getContent());
+		assertTrue(notifications.size()>0);
+		
 	}
+	
+	@Test
+	public void test4() {
+		Notification insert_notification = new Notification();
+		insert_notification.setId("777");
+		insert_notification.setType("journal");
+		notificationService.updateNotification(insert_notification);
+		
+		List<Notification> notifications = notificationService.getNotification("journal");
+		logger.info(notifications.get(0).getContent());
+		assertTrue(notifications.size()>0);
+	
+	}
+	
+
 	
 	private static final Logger logger = Logger.getLogger(NotificationServiceTest.class);
 }
