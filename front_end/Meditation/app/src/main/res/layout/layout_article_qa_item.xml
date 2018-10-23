@@ -6,6 +6,7 @@
 
 
     <TextView
+        android:id="@+id/article_qa_q"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Q:"
@@ -13,7 +14,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="15dp"
         android:textColor="#716a6a"
-        android:textStyle="bold"/>
+     />
     <TextView
         android:id="@+id/article_qa_item_textview"
         android:layout_width="300dp"
@@ -26,6 +27,7 @@
 
         />
     <TextView
+        android:id="@+id/article_qa_a"
         android:layout_below="@+id/article_qa_item_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +36,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="15dp"
         android:textColor="#716a6a"
-        android:textStyle="bold"/>
+       />
     <TextView
         android:layout_below="@+id/article_qa_item_textview"
         android:id="@+id/article_qa_item_textview_1"

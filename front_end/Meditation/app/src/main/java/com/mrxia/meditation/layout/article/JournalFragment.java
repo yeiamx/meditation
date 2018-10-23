@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,16 +103,18 @@ public class JournalFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("xxchu","into");
         if (resultCode == 4) {
-            if (requestCode == 1) {
                 String newJournal = data.getStringExtra("newJournal");
                 long time=System.currentTimeMillis();//long now = android.os.SystemClock.uptimeMillis();
                 SimpleDateFormat format=new SimpleDateFormat("yyyy/M/d");
                 Date d1=new Date(time);
                 String t1=format.format(d1);
                 Journal journal = new Journal("add", "add",newJournal,t1,R.drawable.think);
+
                 mAdapter.addData(0,journal);
+                Log.d("xxchu",this.mDataList.get(0).getContent());
             }
-        }
+
     }
 }

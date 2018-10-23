@@ -67,6 +67,7 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
         mDataList.add(position, journal);
         notifyItemInserted(position);
     }
+
     class JournalViewHolder extends RecyclerView.ViewHolder{
         private CircleImageView userHead;
         private TextView userName;
