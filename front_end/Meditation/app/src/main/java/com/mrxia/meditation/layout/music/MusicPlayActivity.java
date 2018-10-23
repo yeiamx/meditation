@@ -19,6 +19,7 @@ import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.utils.LoadingView;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -44,6 +45,7 @@ public class MusicPlayActivity extends AppCompatActivity {
 
     public static boolean SEEK_BAR_STATE = true; //默认不是滑动状态
     private String musicPath;
+    private String backgroundImgUrl;
     private LoadingView loadingView;
     private ImageView background;
 
@@ -60,16 +62,21 @@ public class MusicPlayActivity extends AppCompatActivity {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         Intent intent = getIntent();
         musicPath = intent.getStringExtra("path");
+        backgroundImgUrl = intent.getStringExtra("imgUrl");
+        mediaPlayer = new MediaPlayer();
 
         initView();
-        play();
         registerListener();
+        play();
         setHalfTransparent();
     }
 
     private void initView() {
         background = findViewById(R.id.music_background);
-        ImageLoader.getInstance().displayImage(MyApplication.themeImageUrl, background);
+        Picasso
+                .with(this)
+                .load(backgroundImgUrl)
+                .into(background);
 
         imagePlay = findViewById(R.id.imagePlay);
         imageNext = findViewById(R.id.imageNext);
@@ -89,6 +96,14 @@ public class MusicPlayActivity extends AppCompatActivity {
                 pause();
             }
         });
+        mediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
+            public void onSeekComplete(MediaPlayer m) {
+                m.start();
+                if (loadingView!=null) {
+                    loadingView.dismiss();
+                }
+            }
+        });
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -104,16 +119,34 @@ public class MusicPlayActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 mediaPlayer.seekTo(seekBar.getProgress());
                 isChanging=false;
+                if (loadingView!=null) {
+                    loadingView.show();
+                }
+            }
+        });
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                // 装载完毕 开始播放流媒体
+                Log.d("mrxiaa", "prepare over");
+                mediaPlayer.start();
+                seekBar.setMax(mediaPlayer.getDuration());//设置进度条
+                setTimer();
+                if (loadingView!=null) {
+                    loadingView.dismiss();
+                }
             }
         });
     }
 
     protected void play() {
-        mediaPlayer = new MediaPlayer();
+        Log.d("mrxiaa", "start playing");
+        mediaPlayer.reset();
         // 设置指定的流媒体地址
         try {
             mediaPlayer.setDataSource(musicPath);
         } catch (IOException e) {
+            Log.d("mrxiaa", "set wrong");
             e.printStackTrace();
         }
         // 设置音频流的类型
@@ -121,17 +154,7 @@ public class MusicPlayActivity extends AppCompatActivity {
         // 通过异步的方式装载媒体资源
         loadingView.show();
         mediaPlayer.prepareAsync();
-        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                // 装载完毕 开始播放流媒体
-                mediaPlayer.start();
-                seekBar.setMax(mediaPlayer.getDuration());//设置进度条
-                setTimer();
-                if (loadingView!=null)
-                    loadingView.dismiss();
-            }
-        });
+        Log.d("mrxiaa", "start prepare");
         // 设置循环播放
         // mediaPlayer.setLooping(true);
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -146,8 +169,9 @@ public class MusicPlayActivity extends AppCompatActivity {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
                 // 如果发生错误，重新播放
+                Log.d("mrxiaa", "error playing...replay");
+                Log.d("mrxiaa", "OnError - Error code: " + what + " Extra code: " + extra);
                 replay();
-                Log.d("mrxiaa", "error playing...");
                 return false;
             }
         });
@@ -161,7 +185,9 @@ public class MusicPlayActivity extends AppCompatActivity {
                 if(isChanging) {
                     return;
                 }
-                seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                  seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                }
             }
         };
         mTimer.schedule(mTimerTask, 0, 10);
@@ -193,6 +219,7 @@ public class MusicPlayActivity extends AppCompatActivity {
     }
 
     protected void stop() {
+        mTimerTask.cancel();
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
             mediaPlayer.release();
