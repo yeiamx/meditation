@@ -203,7 +203,7 @@ public class MusicPlayActivity extends AppCompatActivity {
     protected void pause() {
         if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
             mediaPlayer.start();
-            //Log.d("mrxiaa", "start!");
+            //Log.d("mrxiaa", "start in music play!");
             imagePlay.setImageResource(R.mipmap.music_pause);
             //Log.d("mrxiaa", "to pause");
 

@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -64,83 +63,122 @@ public class DashboardFragment extends Fragment {
     public void registerListener(){
         mDay_Button.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                mDay_Button.setActivated(true);
+                mWeek_Button.setActivated(false);
+                mMonth_Button.setActivated(false);
                 pointCount = 0;
                 lineColor = 0;
                 position = 0;
                 pointValueList.clear();
-                startTimer();
+                drawChart(7);
+                drawChart(7);
             }
         });
         mWeek_Button.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                mDay_Button.setActivated(false);
+                mWeek_Button.setActivated(true);
+                mMonth_Button.setActivated(false);
                 pointCount = 0;
                 lineColor = 1;
                 position = 0;
                 pointValueList.clear();
-                startTimer();
+                drawChart(7);
+                drawChart(7);
             }
         });
         mMonth_Button.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+                mDay_Button.setActivated(false);
+                mWeek_Button.setActivated(false);
+                mMonth_Button.setActivated(true);
                 pointCount = 0;
                 lineColor = 2;
                 position = 0;
                 pointValueList.clear();
-                startTimer();
+                drawChart(7);
+                drawChart(7);
             }
         });
     }
 
+    public void drawChart(int pointNum){
+        PointValue value;
+        for(int i=0;i<=pointNum;i++){
+            value = new PointValue(position * 1, random.nextInt(100) + 40);
+            pointValueList.add(value);
+            position++;
+        }
+        float x = pointValueList.get(pointValueList.size()-1).getX();
+        Line line = new Line(pointValueList);
+        if(lineColor == 0){
+            line.setColor(Color.RED);
+        }
+        else if(lineColor == 1){
+            line.setColor(Color.GREEN);
+        }
+        else{
+            line.setColor(Color.BLUE);
+        }
+        line.setShape(ValueShape.CIRCLE);
+        line.setCubic(true);//曲线是否平滑，即是曲线还是折线
+
+        linesList.clear();
+        linesList.add(line);
+        lineChartData = initDatas(linesList);
+        lineChartView.setLineChartData(lineChartData);
+    }
 
 
     public void startTimer() {
         timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    if(pointCount>=9){
-                        stopTimer();
-                    }
-                    //实时添加新的点
-                    PointValue value1 = new PointValue(position * 5, random.nextInt(100) + 40);
-                    value1.setLabel("00:00");
-                    pointValueList.add(value1);
-
-                    float x = value1.getX();
-                    //根据新的点的集合画出新的线
-                    Line line = new Line(pointValueList);
-                    if(lineColor == 0){
-                        line.setColor(Color.RED);
-                    }
-                    else if(lineColor == 1){
-                        line.setColor(Color.GREEN);
-                    }
-                    else{
-                        line.setColor(Color.BLUE);
-                    }
-                    line.setShape(ValueShape.CIRCLE);
-                    line.setCubic(true);//曲线是否平滑，即是曲线还是折线
-
-                    linesList.clear();
-                    linesList.add(line);
-                    lineChartData = initDatas(linesList);
-                    lineChartView.setLineChartData(lineChartData);
-                    //根据点的横坐实时变幻坐标的视图范围
-                    Viewport port;
-                    if (x > 50) {
-                        port = initViewPort(x - 50, x);
-                    } else {
-                        port = initViewPort(0, 50);
-                    }
-                    lineChartView.setCurrentViewport(port);//当前窗口
-
-                    Viewport maPort = initMaxViewPort(x);
-                    lineChartView.setMaximumViewport(maPort);//最大窗口
-                    position++;
-                    pointCount++;
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if(pointCount>=9){
+                    stopTimer();
                 }
-            }, 300, 300);
-        }
+                //实时添加新的点
+                PointValue value1 = new PointValue(position * 5, random.nextInt(100) + 40);
+                pointValueList.add(value1);
+
+                float x = value1.getX();
+                //根据新的点的集合画出新的线
+                Line line = new Line(pointValueList);
+                if(lineColor == 0){
+                    line.setColor(Color.RED);
+                }
+                else if(lineColor == 1){
+                    line.setColor(Color.GREEN);
+                }
+                else{
+                    line.setColor(Color.BLUE);
+                }
+                line.setShape(ValueShape.CIRCLE);
+                line.setCubic(true);//曲线是否平滑，即是曲线还是折线
+
+                linesList.clear();
+                linesList.add(line);
+                lineChartData = initDatas(linesList);
+                lineChartView.setLineChartData(lineChartData);
+
+                Viewport port;
+                port = initViewPort(0, 50);
+                //根据点的横坐实时变幻坐标的视图范围
+//                    if (x > 50) {
+//                        port = initViewPort(x - 50, x);
+//                    } else {
+//                        port = initViewPort(0, 50);
+//                    }
+                lineChartView.setCurrentViewport(port);//当前窗口
+
+                Viewport maPort = initMaxViewPort(x);
+                lineChartView.setMaximumViewport(maPort);//最大窗口
+                position++;
+                pointCount++;
+            }
+        }, 0, 1);
+    }
 
     public void stopTimer(){
         timer.cancel();
@@ -166,7 +204,7 @@ public class DashboardFragment extends Fragment {
         lineChartData = initDatas(null);
         lineChartView.setLineChartData(lineChartData);
 
-        Viewport port = initViewPort(0, 50);
+        Viewport port = initViewPort(0, 7);
         lineChartView.setCurrentViewportWithAnimation(port);
         lineChartView.setInteractive(false);
         lineChartView.setScrollEnabled(true);
@@ -175,6 +213,9 @@ public class DashboardFragment extends Fragment {
         lineChartView.setViewportCalculationEnabled(false);
         lineChartView.setContainerScrollEnabled(true, ContainerScrollType.HORIZONTAL);
         lineChartView.startDataAnimation();
+        lineChartView.setCurrentViewport(port);//当前窗口
+        Viewport maPort = initMaxViewPort(7);
+        lineChartView.setMaximumViewport(maPort);//最大窗口
         points = new ArrayList<>();
     }
 

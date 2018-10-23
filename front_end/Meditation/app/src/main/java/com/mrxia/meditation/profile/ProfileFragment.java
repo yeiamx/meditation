@@ -21,6 +21,7 @@ public class ProfileFragment extends Fragment {
     private TextView title;
     private ViewPager viewPager;
     private List<String> titles = new ArrayList<>();
+
     public static ProfileFragment newInstance() {
         ProfileFragment frag = new ProfileFragment();
         return frag;
