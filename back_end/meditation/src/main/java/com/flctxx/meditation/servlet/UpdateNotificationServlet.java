@@ -2,7 +2,6 @@ package com.flctxx.meditation.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,24 +11,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.flctxx.meditation.bean.Notification;
 import com.flctxx.meditation.service.NotificationService;
 import com.flctxx.meditation.utils.NetworkUtility;
 
 /**
- * Servlet implementation class GetNotification
+ * Servlet implementation class UpdateNotificationServlet
  */
 
-public class GetNotificationServlet extends HttpServlet {
+public class UpdateNotificationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private NotificationService notificationService = new NotificationService();
+	private NotificationService notificationService = new NotificationService();   
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetNotificationServlet() {
+    public UpdateNotificationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,22 +43,25 @@ public class GetNotificationServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
 		String jsonString = NetworkUtility.exhaustBufferedReader(request.getReader());
-		JSONObject parameters = JSON.parseObject(jsonString);
-		
-		if (parameters==null) {
-	       out.print("didnt pass correct json string");
-           logger.info("didnt get correct json string");
-           return;
+		Notification notification = null;
+		try {
+			notification = JSONObject.parseObject(jsonString, Notification.class);
+		} catch (Exception e){
+	      	 out.print("didnt pass correct json string");
+	         logger.info("didnt get correct json string");
+	         return;
 		}
 		
-		String type = parameters.getString("type");
+		if (notificationService.updateNotification(notification)){
+			out.println("{status:true}");
+		} else {
+			out.print("{status:false}");
+            logger.info("update failed");
+		}
 		
-		List<Notification> notificationRes = notificationService.getNotification(type);
-		String resJsonStr= JSONArray.toJSONString(notificationRes);
-		out.print(resJsonStr);
 	}
-	private static final Logger logger = Logger.getLogger(GetNotificationServlet.class);
+	private static final Logger logger = Logger.getLogger(UpdateNotificationServlet.class);
 }

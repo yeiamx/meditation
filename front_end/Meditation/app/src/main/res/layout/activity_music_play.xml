@@ -71,7 +71,7 @@
 
         <!--显示总进度-->
         <TextView
-            android:id="@+id/totleText"
+            android:id="@+id/totalText"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"

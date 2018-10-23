@@ -124,7 +124,7 @@ public class ContentRecyclerAdapter extends RecyclerView.Adapter<ContentRecycler
 
         public void refreshData(List<Notification> data, int position){
             title.setText(data.get(position).getTitle());
-            content.setText(data.get(position).getContent());
+            //content.setText(data.get(position).getContent());
             //ImageLoader.getInstance().displayImage(data.get(position).getImgUrl(), cardBackground);
             Picasso
                     .with(context)

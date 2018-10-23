@@ -55,10 +55,10 @@ public class TravelRecyclerAdapter extends RecyclerView.Adapter<TravelRecyclerAd
             title.setText(data.get(position).getTitle());
             content.setText(data.get(position).getContent());
             //ImageLoader.getInstance().displayImage(data.get(position).getImgUrl(), cardBackground);
-            /*Picasso
+            Picasso
                     .with(context)
                     .load(data.get(position).getImgUrl())
-                    .into(cardBackground);*/
+                    .into(cardBackground);
         }
     }
 }

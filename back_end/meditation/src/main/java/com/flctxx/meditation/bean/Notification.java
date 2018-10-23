@@ -1,5 +1,7 @@
 package com.flctxx.meditation.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "notification")
-public class Notification {
+public class Notification implements Serializable {
     @Id
     @Column(name = "id")
     private String id;
@@ -27,6 +29,17 @@ public class Notification {
     @Column(name = "type")
     private String type;
     
+    @Column(name = "time")
+    private String time;
+    
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -100,6 +113,17 @@ public class Notification {
 		this.imgUrl = imgUrl;
 		this.resUrl = resUrl;
 		this.type = type;
+	}
+	
+	public Notification(String id, String title, String content, String imgUrl, String resUrl, String type, String time) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
+		this.imgUrl = imgUrl;
+		this.resUrl = resUrl;
+		this.type = type;
+		this.time = time;
 	}
 	
 	public Notification() {

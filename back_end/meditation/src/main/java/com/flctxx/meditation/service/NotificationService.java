@@ -16,7 +16,7 @@ import com.flctxx.meditation.dao.BaseDAO;
 
 public class NotificationService {
 	private String tableName = "com.flctxx.meditation.bean.Notification";
-	BaseDAO dao = new BaseDAO();
+	private BaseDAO dao = new BaseDAO();
 	
 	public NotificationService(){
 	}
@@ -25,28 +25,20 @@ public class NotificationService {
 		return dao.listFromId(id, tableName);
 	}
 	
-	public List<Notification> getArticleNotification(){
+	public List<Notification> getNotification(String type){
 		List<Notification> totalRes = dao.listAll(tableName);
 		List<Notification> res = new ArrayList();
 		for (Notification notification : totalRes){
-			if (notification.getType().contains("article")){
+			if (notification.getType().contains(type)){
 				res.add(notification);
 			}
 		}
-		
-		return res;
-	}
-	public List<Notification> getMusicNotification(){
-		List<Notification> totalRes = dao.listAll(tableName);
-		List<Notification> res = new ArrayList();
-		for (Notification notification : totalRes){
-			if (notification.getType().contains("music")){
-				res.add(notification);
-			}
-		}
-		
 		return res;
 	}
 	
+	public Boolean updateNotification(Notification notification){
+		return dao.saveOrUpdate(notification);
+	}
+
 	private static final Logger logger = Logger.getLogger(NotificationService.class);
 }
