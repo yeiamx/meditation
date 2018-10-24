@@ -35,16 +35,15 @@
         android:textSize="20dp"
         android:typeface="normal" />
 
-    <com.mrxia.meditation.layout.music.lrcdeal.LrcView
+    <TextView
         android:id="@+id/LrcViewId"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/MusicArtist"
         android:layout_centerHorizontal="true"
         android:layout_margin="5dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:focusedByDefault="true" />
+        android:textSize="16sp"
+        android:textColor="@color/theme_blue"/>
 
 
     <RelativeLayout

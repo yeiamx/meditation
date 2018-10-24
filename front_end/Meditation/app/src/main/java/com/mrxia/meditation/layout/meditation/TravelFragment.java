@@ -71,6 +71,7 @@ public class TravelFragment extends Fragment {
                     Bundle bundle = new Bundle();
                     bundle.putString("path", data.get(position).getResUrl());
                     bundle.putString("imgUrl", data.get(position).getImgUrl());
+                    bundle.putString("content", data.get(position).getContent());
                     Intent intent = new Intent();
                     //绑定需要传递的参数
                     intent.putExtras(bundle);

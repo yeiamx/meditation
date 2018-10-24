@@ -44,8 +44,10 @@ public class MusicPlayActivity extends AppCompatActivity {
     public static boolean SEEK_BAR_STATE = true; //默认不是滑动状态
     private String musicPath;
     private String backgroundImgUrl;
+    private String contentStr;
     private LoadingView loadingView;
     private ImageView background;
+    private TextView content;
 
     @Override
     public void takeKeyEvents(boolean get) {
@@ -61,6 +63,7 @@ public class MusicPlayActivity extends AppCompatActivity {
         Intent intent = getIntent();
         musicPath = intent.getStringExtra("path");
         backgroundImgUrl = intent.getStringExtra("imgUrl");
+        contentStr = intent.getStringExtra("content");
         mediaPlayer = new MediaPlayer();
 
         initView();
@@ -84,6 +87,8 @@ public class MusicPlayActivity extends AppCompatActivity {
         seekBar = findViewById(R.id.seekBar);
         findViewById(R.id.rl_SeekBar).setFocusableInTouchMode(true);
         loadingView = new LoadingView(this, R.style.CustomDialog);
+        content = findViewById(R.id.LrcViewId);
+        content.setText(contentStr);
     }
 
     private void registerListener() {

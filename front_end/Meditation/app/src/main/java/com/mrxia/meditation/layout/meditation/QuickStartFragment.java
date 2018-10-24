@@ -40,7 +40,6 @@ public class QuickStartFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_meditation_quickstart, container, false);
         mediaPlayer = new MediaPlayer();
 
-
         initView(view);
         registerListener();
         initData();

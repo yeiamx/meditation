@@ -71,6 +71,7 @@ public class ContentRecyclerAdapter extends RecyclerView.Adapter<ContentRecycler
                     Bundle bundle = new Bundle();
                     bundle.putString("path", data.get(position).getResUrl());
                     bundle.putString("imgUrl", data.get(position).getImgUrl());
+                    bundle.putString("content", "");
                     Intent intent = new Intent();
                     //绑定需要传递的参数
                     intent.putExtras(bundle);
