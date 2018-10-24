@@ -6,9 +6,11 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
@@ -19,12 +21,12 @@ import java.io.IOException;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class QuickStartFragment extends Fragment {
-    private CircleImageView circleMusicButton;
-    private boolean isPlay;
+    private ImageView circleMusicButton;
     private MediaPlayer mediaPlayer;
     private boolean isComplete = true;
     private LoadingView loadingView;
     private final String musicPath = MyApplication.resUrlStarter+"/music/lesson1.mp3";
+    private boolean isFirst = true;
 
     public static QuickStartFragment newInstance() {
         QuickStartFragment frag = new QuickStartFragment();
@@ -37,6 +39,7 @@ public class QuickStartFragment extends Fragment {
         // 1. 加载布局，第三个参数必须为`false`，否则会加载两次布局并且抛出异常！！
         View view = inflater.inflate(R.layout.fragment_meditation_quickstart, container, false);
         mediaPlayer = new MediaPlayer();
+
 
         initView(view);
         registerListener();
@@ -100,20 +103,26 @@ public class QuickStartFragment extends Fragment {
     }
 
     protected void pause() {
-        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
-            //Log.d("mrxiaa", "start!");
-            circleMusicButton.setImageResource(R.mipmap.music_pause);
-            //Log.d("mrxiaa", "to pause");
-
+        if (isFirst){
+            isFirst = false;
             return;
         }
+
+        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+            //Log.d("mrxiaa", "start in QuickStart!");
+            circleMusicButton.setImageResource(R.mipmap.circle_pause_button);
+            //Log.d("mrxiaa", "to pause");
+            return;
+        }
+
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
             //Log.d("mrxiaa", "pause!");
-            circleMusicButton.setImageResource(R.mipmap.music_play);
+            circleMusicButton.setImageResource(R.mipmap.circle_play_button);
             //Log.d("mrxiaa", "to play");
         }
+
     }
 
     protected void play() {
@@ -162,12 +171,16 @@ public class QuickStartFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        pause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            //Log.d("mrxiaa", "pause!");
+            circleMusicButton.setImageResource(R.mipmap.circle_play_button);
+            //Log.d("mrxiaa", "to play");
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        pause();
     }
 }

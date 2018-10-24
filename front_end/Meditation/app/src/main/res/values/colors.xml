@@ -12,6 +12,7 @@
     <color name="bottom_active">#669933</color>
     <color name="bottom_inactive">#cccc99</color>
     <color name="theme_blue">#105978</color>
+    <color name="shallow_theme_blue">#95B6C3</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="darkpurple">#4f2468</color>

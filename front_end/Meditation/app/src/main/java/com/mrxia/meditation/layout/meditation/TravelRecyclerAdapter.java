@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.Notification;
 import com.squareup.picasso.Picasso;
@@ -43,22 +44,29 @@ public class TravelRecyclerAdapter extends RecyclerView.Adapter<TravelRecyclerAd
         TextView content;
         TextView title;
         ImageView cardBackground;
+        ImageView lock;
 
         public MyHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.travel_noti_title);
             content = itemView.findViewById(R.id.travel_noti_content);
             cardBackground = itemView.findViewById(R.id.travel_content_cardback);
+            lock = itemView.findViewById(R.id.travel_lock);
         }
 
         public void refreshData(List<Notification> data, int position){
             title.setText(data.get(position).getTitle());
-            content.setText(data.get(position).getContent());
+            //content.setText(data.get(position).getContent());
             //ImageLoader.getInstance().displayImage(data.get(position).getImgUrl(), cardBackground);
             Picasso
                     .with(context)
                     .load(data.get(position).getImgUrl())
                     .into(cardBackground);
+            if (MyApplication.travelLock[position]==1){
+                lock.setVisibility(View.INVISIBLE);
+            } else {
+                lock.setImageResource(R.mipmap.locked);
+            }
         }
     }
 }

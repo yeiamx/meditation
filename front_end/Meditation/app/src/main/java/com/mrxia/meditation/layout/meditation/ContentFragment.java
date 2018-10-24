@@ -54,9 +54,14 @@ public class ContentFragment extends Fragment {
     }
 
     private void initData(){
-        data = new ArrayList<>();
-        loadingView.show();
-        getMusics();
+        if (data==null) {
+            data = new ArrayList<>();
+            loadingView.show();
+            getMusics();
+        } else {
+            adapter = new ContentRecyclerAdapter(getActivity(), data);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     public void registerListener(){
