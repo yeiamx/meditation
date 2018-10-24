@@ -182,12 +182,5 @@ public class QuickStartFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
-            //Log.d("mrxiaa", "start in QuickStart!");
-            circleMusicButton.setImageResource(R.mipmap.circle_pause_button);
-            //Log.d("mrxiaa", "to pause");
-            return;
-        }
     }
 }

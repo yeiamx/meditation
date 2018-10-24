@@ -17,6 +17,7 @@ import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.Notification;
 import com.mrxia.meditation.layout.music.MusicPlayActivity;
+import com.mrxia.meditation.utils.ActivityUtil;
 import com.mrxia.meditation.utils.HttpUtil;
 import com.mrxia.meditation.utils.ItemClickListener;
 import com.mrxia.meditation.utils.LoadingView;
@@ -66,14 +67,18 @@ public class TravelFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new ItemClickListener(recyclerView, new ItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putString("path", data.get(position).getResUrl());
-                bundle.putString("imgUrl", data.get(position).getImgUrl());
-                Intent intent = new Intent();
-                //绑定需要传递的参数
-                intent.putExtras(bundle);
-                intent.setClass(getActivity(), MusicPlayActivity.class);
-                getActivity().startActivity(intent);
+                if (MyApplication.travelLock[position]==1) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("path", data.get(position).getResUrl());
+                    bundle.putString("imgUrl", data.get(position).getImgUrl());
+                    Intent intent = new Intent();
+                    //绑定需要传递的参数
+                    intent.putExtras(bundle);
+                    intent.setClass(getActivity(), MusicPlayActivity.class);
+                    getActivity().startActivity(intent);
+                }else {
+                    ActivityUtil.showToast(getActivity(), "一步一个脚印，先去学完之前的课程吧~");
+                }
             }
 
             @Override
@@ -91,8 +96,6 @@ public class TravelFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(adapter);
-        adapter = new TravelRecyclerAdapter(getActivity(), data);
     }
 
     private void getLessons(){
@@ -124,7 +127,7 @@ public class TravelFragment extends Fragment {
                     loadingView.dismiss();
                 }
 
-                for (int i=0; i<6; i++){
+                for (int i=0; i<7; i++){
                     int num = i%lessons.size();
                     data.add(lessons.get(num));
                 }

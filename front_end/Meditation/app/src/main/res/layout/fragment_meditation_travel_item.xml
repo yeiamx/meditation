@@ -39,11 +39,12 @@
                 android:id="@+id/travel_noti_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Default"/>
+                android:text=""/>
             <ImageView
+                android:id="@+id/travel_lock"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:background="@drawable/locked"
+                android:background="@mipmap/locked"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="8dp"
