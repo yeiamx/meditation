@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -14,7 +15,9 @@ import android.view.WindowManager;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.mrxia.meditation.R;
+import com.mrxia.meditation.bean.Journal;
 import com.mrxia.meditation.layout.article.ArticleFragment;
+import com.mrxia.meditation.layout.article.JournalFragment;
 import com.mrxia.meditation.layout.home.HomeFragment;
 import com.mrxia.meditation.layout.meditation.MeditationFragment;
 import com.mrxia.meditation.profile.ProfileFragment;
@@ -125,12 +128,17 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("xxchu", "main onresult:"+resultCode);
         if (resultCode == RESULT_OK) {
             if (data.getStringExtra("class").equals("setting")) {
                 HomeFragment fragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("home");
                 //通过id或者tag可以从manager获取fragment对象，
                 fragment.onActivityResult(requestCode, resultCode, data);
             }
+        } else if (resultCode == 4) {
+            ArticleFragment fragment = (ArticleFragment) getSupportFragmentManager().findFragmentByTag("article");
+            //通过id或者tag可以从manager获取fragment对象，
+            fragment.onActivityResult(requestCode, resultCode, data);
         }
     }
 

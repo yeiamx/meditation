@@ -1,10 +1,12 @@
 package com.mrxia.meditation.layout.article;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ public class ArticleFragment extends Fragment{
     private TextView title;
     private ViewPager viewPager;
     private List<String> titles = new ArrayList<>();
+    private List<Fragment> fragments;
     public static ArticleFragment newInstance() {
         ArticleFragment frag = new ArticleFragment();
         return frag;
@@ -88,12 +91,21 @@ public class ArticleFragment extends Fragment{
 
         viewPager = view.findViewById(R.id.article_viewpager);
         mTabLayout.setupWithViewPager(viewPager);
-        List<Fragment> fragments = new ArrayList<>();
+        fragments = new ArrayList<>();
         fragments.add(ContentFragment.newInstance());
         fragments.add(JournalFragment.newInstance());
         fragments.add(QaFragment.newInstance());
         ArticleFragmentAdapter adapter = new ArticleFragmentAdapter(getChildFragmentManager(),fragments, titles);
         viewPager.setAdapter(adapter);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("xxchu", "into article");
+        if(resultCode==4){
+            fragments.get(1).onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

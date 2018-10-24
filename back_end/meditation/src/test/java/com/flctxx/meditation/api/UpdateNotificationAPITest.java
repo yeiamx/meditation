@@ -16,7 +16,9 @@ public class UpdateNotificationAPITest extends AbstractTest{
 	public void test0(){
 		Notification notification = new Notification();
 		notification.setId("777");
-		notification.setTime("101010");
+		notification.setTitle("wo");
+		notification.setContent("jjjjjjjjjjjjjj");
+		notification.setTime("20181024");
 		notification.setType("journal_test");
 		String jsonString = JSON.toJSONString(notification);
 		postUrl = urlStarter + "/updateNotification";
@@ -35,7 +37,7 @@ public class UpdateNotificationAPITest extends AbstractTest{
 		JSONArray array = JSONArray.parseArray(resJsonString);
 		Boolean flag = false;
 		for (int i=0; i<array.size(); i++){
-			if (array.getJSONObject(i).getString("time").equals("101010")){
+			if (array.getJSONObject(i).getString("time").equals("20181024")){
 				flag = true;
 				break;
 			}

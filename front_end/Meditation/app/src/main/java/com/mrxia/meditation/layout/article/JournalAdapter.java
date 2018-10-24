@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.Journal;
+import com.mrxia.meditation.bean.Notification;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,9 +23,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalViewHolder> {
 
     private Context mContext;
-    private  List<Journal> mDataList;
+    private  List<Notification> mDataList;
 
-    public JournalAdapter(Context context, List<Journal> list){
+    public JournalAdapter(Context context, List<Notification> list){
 
         this.mContext = context;
         this.mDataList = list;
@@ -36,10 +38,14 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
 
     @Override
     public void onBindViewHolder(JournalAdapter.JournalViewHolder holder, final int position) {
-        holder.userHead.setImageResource(mDataList.get(position).getUserHead());
-        holder.userName.setText(mDataList.get(position).getUserName());
+       // holder.userHead.setImageResource(mDataList.get(position).getUserHead());
+        holder.userName.setText(mDataList.get(position).getTitle());
         holder.time.setText(mDataList.get(position).getTime());
         holder.content.setText(mDataList.get(position).getContent());
+        Picasso
+                .with(mContext)
+                .load(mDataList.get(position).getImgUrl())
+                .into(holder.userHead);
 
  //       holder.textView.setText(mDataList.get(position).getQuestion());
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -63,10 +69,11 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
         return mDataList.size();
     }
 
-    public void addData(int position, Journal journal){
-        mDataList.add(position, journal);
+    public void addData(int position, Notification notification){
+        mDataList.add(position, notification);
         notifyItemInserted(position);
     }
+
     class JournalViewHolder extends RecyclerView.ViewHolder{
         private CircleImageView userHead;
         private TextView userName;

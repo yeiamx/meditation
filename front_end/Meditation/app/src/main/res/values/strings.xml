@@ -17,5 +17,15 @@
     <string name="title_3">Bad</string>
     <string name="title_4">Ugly</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="question_1">冥想是什么</string>
+    <string name="answer_1">冥想是一个很模糊的概念，不能够将它泛泛地定义成什么。如果你在放松或者凝视这也可以是一种冥想。</string>
+    <string name="question_2">什么样的人适合冥想</string>
+    <string name="answer_2">除了少数患有精神障碍的人以外任何年龄的人都适合进行冥想。</string>
+    <string name="question_3">哪一种冥想建议适合入门 </string>
+    <string name="answer_3">适合自己并且自己有因缘可以学习的就是最适合的一种冥想，太过看重流派和方法反而适得其反，重要的是去体验-在有体验的基础上再去学习。</string>
+
     <string name="text_1">Android Developer notes</string>
+
 </resources>
