@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -15,13 +16,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.mrxia.meditation.R;
+import com.mrxia.meditation.bean.Notification;
+import com.mrxia.meditation.utils.HttpUtil;
+import com.mrxia.meditation.utils.LoadingView;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
+import static com.mrxia.meditation.MyApplication.urlStarter;
 
 public class ArticleJournalActivity extends AppCompatActivity {
     private TextView tv_head;
     private ImageView iv_back;
     private Button btn;
     private EditText et;
+    private LoadingView loadingView;
 
 
     @Override
@@ -34,6 +53,7 @@ public class ArticleJournalActivity extends AppCompatActivity {
     }
 
     public void initView(View view) {
+        loadingView = new LoadingView(ArticleJournalActivity.this, R.style.CustomDialog);
         tv_head = view.findViewById(R.id.article_journal_head);
         Typeface typeface = Typeface.createFromAsset(ArticleJournalActivity.this.getAssets(), "fonts/segoe_script.ttf");
         tv_head.setTypeface(typeface);
@@ -62,14 +82,70 @@ public class ArticleJournalActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(et.getText())){
                     Toast.makeText(ArticleJournalActivity.this,"请输入日志内容", Toast.LENGTH_SHORT).show();
                 }else{
+                    if (loadingView!=null){
+                        loadingView.show();
+                    }
+                    updateJournal();
                    // Toast.makeText(ArticleJournalActivity.this,"jjj", Toast.LENGTH_SHORT).show();
-                    String newJournal = et.getText().toString();
-                    Intent intent = new Intent();
-                    intent.putExtra("newJournal", newJournal);
-                    setResult(4, intent);
-                    finish();
+//                    String newJournal = et.getText().toString();
+//                    Intent intent = new Intent();
+//                    intent.putExtra("newJournal", newJournal);
+//                    loadingView = new LoadingView(ArticleJournalActivity.this, R.style.CustomDialog);
+//                    loadingView.show();
+//                    setResult(4, intent);
+//                    finish();
                 }
             }
+        });
+
+    }
+
+    public void updateJournal(){
+        Random ran = new Random(System.currentTimeMillis());
+        final String newJournal = et.getText().toString();
+        final Notification notification = new Notification();
+        String id = "" + ran.nextInt();
+        notification.setId(id);
+        notification.setTitle("wo");
+        notification.setContent(newJournal);
+        notification.setType("journal_test");
+        long time=System.currentTimeMillis();//long now = android.os.SystemClock.uptimeMillis();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy/M/d");
+        Date d1=new Date(time);
+        String t1=format.format(d1);
+        notification.setTime(t1);
+        String jsonString = JSON.toJSONString(notification);
+        String postUrl = urlStarter + "/updateNotification";
+
+        HttpUtil.postJson_asynch(postUrl, jsonString, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("xxchu", e.getMessage());
+                e.printStackTrace();
+                if (loadingView!=null) {
+                    loadingView.dismiss();
+                }
+                Toast.makeText(ArticleJournalActivity.this,"发表失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resultStr = response.body().string();
+                Log.d("xxchu", resultStr);
+
+                if (loadingView!=null) {
+                    loadingView.dismiss();
+                }
+                Toast.makeText(ArticleJournalActivity.this,"发表成功", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent();
+                intent.putExtra("newJournal", notification);
+
+
+                setResult(4, intent);
+                finish();
+            }
+
         });
 
     }

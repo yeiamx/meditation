@@ -18,14 +18,27 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.Journal;
+import com.mrxia.meditation.bean.Notification;
+import com.mrxia.meditation.layout.meditation.TravelRecyclerAdapter;
+import com.mrxia.meditation.utils.HttpUtil;
+import com.mrxia.meditation.utils.LoadingView;
 
+import java.io.IOException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
+import static com.mrxia.meditation.MyApplication.urlStarter;
 
 public class JournalFragment extends Fragment {
 
@@ -35,8 +48,11 @@ public class JournalFragment extends Fragment {
     private DividerItemDecoration mDividerItemDecoration;
     private ImageButton btn;
     private TextView logan;
+    private LoadingView loadingView;
+    private List<Notification> data;
+    private List<Notification> journals;
 
-    private List<Journal> mDataList;
+
 
     public static JournalFragment newInstance() {
         JournalFragment frag = new JournalFragment();
@@ -44,11 +60,10 @@ public class JournalFragment extends Fragment {
     }
 
 
-    public void initData() {
-        this.mDataList = new ArrayList<Journal>();
-        for (int i = 0; i < 10; i++) {
-            this.mDataList.add(new Journal("" + i, "user" + i, "content" + i, "2018/10/" + (10 - i), R.drawable.think));
-        }
+    private void initData() {
+        data = new ArrayList<>();
+        loadingView.show();
+        getJournals();
     }
 
     @Override
@@ -56,9 +71,10 @@ public class JournalFragment extends Fragment {
                              Bundle savedInstanceState) {
         // 1. 加载布局，第三个参数必须为`false`，否则会加载两次布局并且抛出异常！！
         View view = inflater.inflate(R.layout.fragment_article_journal, container, false);
-        initData();
+
         initView(view);
         registerListener();
+        initData();
         return view;
     }
 
@@ -67,6 +83,7 @@ public class JournalFragment extends Fragment {
     }
 
     public void initView(View view) {
+        loadingView = new LoadingView(getActivity(), R.style.CustomDialog);
 //        et = view.findViewById(R.id.article_journal_edittext_1);
 //        et.setFocusable(false);
 //        et.setOnClickListener(new View.OnClickListener() {
@@ -95,8 +112,54 @@ public class JournalFragment extends Fragment {
         mDividerItemDecoration = new DividerItemDecoration(rv.getContext(),
                 new LinearLayoutManager(this.getActivity()).getOrientation());
         rv.addItemDecoration(mDividerItemDecoration);
-        mAdapter = new JournalAdapter(this.getActivity(), this.mDataList);
-        rv.setAdapter(mAdapter);
+//        mAdapter = new JournalAdapter(this.getActivity(), this.mDataList);
+//        rv.setAdapter(mAdapter);
+
+    }
+
+    private void getJournals(){
+        journals = new ArrayList<>();
+        String url = urlStarter + "/getNotification";
+        String type="journal";
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("type", type);
+        String paramaters = JSONObject.toJSONString(jsonObject);
+        Log.d("xxchu", "using url " + url);
+
+        HttpUtil.postJson_asynch(url, paramaters, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("xxchu", e.getMessage());
+                e.printStackTrace();
+                if (loadingView!=null) {
+                    loadingView.dismiss();
+                }
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String resultStr = response.body().string();
+                Log.d("xxchu", resultStr);
+                journals = JSONArray.parseArray(resultStr, Notification.class);
+
+                if (loadingView!=null) {
+                    loadingView.dismiss();
+                }
+
+                for (int i=0; i<journals.size(); i++){
+
+                    data.add(journals.get(i));
+                }
+
+                mAdapter = new JournalAdapter(getActivity(), data);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        rv.setAdapter(mAdapter);
+                    }
+                });
+            }
+        });
 
     }
 
@@ -105,15 +168,16 @@ public class JournalFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("xxchu","into");
         if (resultCode == 4) {
-                String newJournal = data.getStringExtra("newJournal");
-                long time=System.currentTimeMillis();//long now = android.os.SystemClock.uptimeMillis();
-                SimpleDateFormat format=new SimpleDateFormat("yyyy/M/d");
-                Date d1=new Date(time);
-                String t1=format.format(d1);
-                Journal journal = new Journal("add", "add",newJournal,t1,R.drawable.think);
+            Notification journal = (Notification) data.getSerializableExtra("newJournal");
+//                String newJournal = data.getStringExtra("newJournal");
+//                long time=System.currentTimeMillis();//long now = android.os.SystemClock.uptimeMillis();
+//                SimpleDateFormat format=new SimpleDateFormat("yyyy/M/d");
+//                Date d1=new Date(time);
+//                String t1=format.format(d1);
+//                Notification journal = new Notification("add", "add",newJournal,t1);
 
                 mAdapter.addData(0,journal);
-                Log.d("xxchu",this.mDataList.get(0).getContent());
+                Log.d("xxchu",this.data.get(0).getContent());
             }
 
     }

@@ -91,8 +91,6 @@ public class TravelFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(adapter);
-        adapter = new TravelRecyclerAdapter(getActivity(), data);
     }
 
     private void getLessons(){
