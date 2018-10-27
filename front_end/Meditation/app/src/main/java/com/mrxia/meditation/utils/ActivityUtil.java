@@ -11,6 +11,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.mrxia.meditation.bean.Notification;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 public class ActivityUtil {
     public static void showToast(Context context, String text){
         Toast.makeText(context,text,Toast.LENGTH_SHORT).show();
@@ -20,4 +26,6 @@ public class ActivityUtil {
         float v = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, context.getResources().getDisplayMetrics());
         return (int) (v + 0.5f);
     }
+
+
 }

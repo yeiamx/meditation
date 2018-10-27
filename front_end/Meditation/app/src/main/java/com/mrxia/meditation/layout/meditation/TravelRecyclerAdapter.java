@@ -55,7 +55,7 @@ public class TravelRecyclerAdapter extends RecyclerView.Adapter<TravelRecyclerAd
         }
 
         public void refreshData(List<Notification> data, int position){
-            title.setText(data.get(position).getTitle());
+            //title.setText(data.get(position).getTitle());
             //content.setText(data.get(position).getContent());
             //ImageLoader.getInstance().displayImage(data.get(position).getImgUrl(), cardBackground);
             Picasso

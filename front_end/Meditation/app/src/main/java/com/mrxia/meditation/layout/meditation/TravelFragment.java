@@ -21,9 +21,11 @@ import com.mrxia.meditation.utils.ActivityUtil;
 import com.mrxia.meditation.utils.HttpUtil;
 import com.mrxia.meditation.utils.ItemClickListener;
 import com.mrxia.meditation.utils.LoadingView;
+import com.mrxia.meditation.utils.TitleOrder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Call;
@@ -124,22 +126,23 @@ public class TravelFragment extends Fragment {
                 Log.d("mrxiaa", resultStr);
                 lessons = JSONArray.parseArray(resultStr, Notification.class);
 
-                if (loadingView!=null) {
+                if (loadingView != null) {
                     loadingView.dismiss();
                 }
-
-                for (int i=0; i<7; i++){
-                    int num = i%lessons.size();
-                    data.add(lessons.get(num));
+                Collections.sort(lessons, new TitleOrder());
+                for (int i = 0; i < lessons.size(); i++) {
+                    data.add(lessons.get(i));
                 }
 
                 adapter = new TravelRecyclerAdapter(getActivity(), data);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        recyclerView.setAdapter(adapter);
-                    }
-                });
+                if (getActivity() != null) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            recyclerView.setAdapter(adapter);
+                        }
+                    });
+                }
             }
         });
 

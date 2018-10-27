@@ -104,6 +104,7 @@ public class MeditationFragment extends Fragment{
         fragments.add(QuickStartFragment.newInstance());
         MeditationFragmentAdapter adapter = new MeditationFragmentAdapter(getChildFragmentManager(),fragments, titles);
         viewPager.setAdapter(adapter);
+        viewPager.setOffscreenPageLimit(3);
 
     }
 }

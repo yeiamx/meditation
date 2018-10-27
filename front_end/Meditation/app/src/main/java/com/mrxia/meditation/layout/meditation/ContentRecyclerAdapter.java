@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.mrxia.meditation.utils.ActivityUtil;
 import com.mrxia.meditation.utils.ItemClickListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 import static com.mrxia.meditation.utils.ActivityUtil.dip2px;
 
@@ -61,6 +63,12 @@ public class ContentRecyclerAdapter extends RecyclerView.Adapter<ContentRecycler
         }
 
         private void refreshData(final List<Notification> data, final int verposition){
+            final List<Notification> horNotificaitons = new ArrayList<>();
+            for (int i=verposition*(data.size()/3); i<verposition*(data.size()/3)+data.size()/3; i++){
+                horNotificaitons.add(data.get(i));
+            }
+            Log.d("mrxiaa", "vertical"+verposition+": "+horNotificaitons.size());
+
             ViewGroup.LayoutParams layoutParams = hor_recyclerview.getLayoutParams();
             layoutParams.height =dip2px(200, context);
             hor_recyclerview.setLayoutParams(layoutParams);
@@ -69,8 +77,8 @@ public class ContentRecyclerAdapter extends RecyclerView.Adapter<ContentRecycler
                 @Override
                 public void onItemClick(View view, int position) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("path", data.get(position).getResUrl());
-                    bundle.putString("imgUrl", data.get(position).getImgUrl());
+                    bundle.putString("path", horNotificaitons.get(position).getResUrl());
+                    bundle.putString("imgUrl", horNotificaitons.get(position).getImgUrl());
                     bundle.putString("content", "");
                     Intent intent = new Intent();
                     //绑定需要传递的参数
@@ -84,7 +92,9 @@ public class ContentRecyclerAdapter extends RecyclerView.Adapter<ContentRecycler
 
                 }
             }));
-            hor_recyclerview.setAdapter(new HorizontalRecyclerViewAdapter(data));
+
+
+            hor_recyclerview.setAdapter(new HorizontalRecyclerViewAdapter(horNotificaitons));
         }
     }
 
@@ -124,7 +134,7 @@ public class ContentRecyclerAdapter extends RecyclerView.Adapter<ContentRecycler
         }
 
         public void refreshData(List<Notification> data, int position){
-            title.setText(data.get(position).getTitle());
+            //title.setText(data.get(position).getTitle());
             //content.setText(data.get(position).getContent());
             //ImageLoader.getInstance().displayImage(data.get(position).getImgUrl(), cardBackground);
             Picasso

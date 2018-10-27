@@ -25,7 +25,7 @@ public class QuickStartFragment extends Fragment {
     private MediaPlayer mediaPlayer;
     private boolean isComplete = true;
     private LoadingView loadingView;
-    private final String musicPath = MyApplication.resUrlStarter+"/music/lesson1.mp3";
+    private final String musicPath = MyApplication.resUrlStarter+"/music/rainwave_4.mp3";
     private boolean isFirst = true;
 
     public static QuickStartFragment newInstance() {

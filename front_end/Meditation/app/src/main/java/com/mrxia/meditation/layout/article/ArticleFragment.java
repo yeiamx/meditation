@@ -97,7 +97,7 @@ public class ArticleFragment extends Fragment{
         fragments.add(QaFragment.newInstance());
         ArticleFragmentAdapter adapter = new ArticleFragmentAdapter(getChildFragmentManager(),fragments, titles);
         viewPager.setAdapter(adapter);
-
+        viewPager.setOffscreenPageLimit(3);
     }
 
     @Override

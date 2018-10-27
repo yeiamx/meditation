@@ -252,13 +252,17 @@ public class MusicPlayActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-        pause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            //Log.d("mrxiaa", "pause!");
+            imagePlay.setImageResource(R.mipmap.music_play);
+            //Log.d("mrxiaa", "to play");
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        pause();
     }
 
     protected void setHalfTransparent() {

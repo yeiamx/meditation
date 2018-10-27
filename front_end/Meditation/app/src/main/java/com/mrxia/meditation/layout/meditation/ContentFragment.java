@@ -18,9 +18,11 @@ import com.mrxia.meditation.bean.Notification;
 import com.mrxia.meditation.layout.article.ContentAdapter;
 import com.mrxia.meditation.utils.HttpUtil;
 import com.mrxia.meditation.utils.LoadingView;
+import com.mrxia.meditation.utils.TitleOrder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Call;
@@ -35,6 +37,8 @@ public class ContentFragment extends Fragment {
     private List<Notification> data;
     private List<Notification> music;
     private LoadingView loadingView;
+    public String[] typeNames = {"rainwave", "soundeffect", "echoesofnature"};
+    public String[] chineseTypeNames = {"自然回声", "聆听雨声", "特殊音效"};
 
     public static ContentFragment newInstance() {
         ContentFragment frag = new ContentFragment();
@@ -91,14 +95,18 @@ public class ContentFragment extends Fragment {
                 String resultStr = response.body().string();
                 Log.d("mrxiaa", resultStr);
                 music = JSONArray.parseArray(resultStr, Notification.class);
+                Log.d("mrxiaa", "get "+music.size()+" musics");
                 if (loadingView!=null) {
                     loadingView.dismiss();
                 }
 
-                for (int i=0; i<5; i++){
-                    int num = i%music.size();
-                    data.add(music.get(num));
+                for (int i=0; i<music.size(); i++){
+                    if (!music.get(i).getType().equals("music_lesson")) {
+                        data.add(music.get(i));
+                    }
                 }
+                Collections.sort(data, new TitleOrder());
+
                 adapter = new ContentRecyclerAdapter(getActivity(), data);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
@@ -126,7 +134,7 @@ public class ContentFragment extends Fragment {
 
             @Override
             public String getGroupFirstLine(int position) {
-                return "类别"+String.valueOf(position);
+                return chineseTypeNames[position];
             }
         }));
     }
