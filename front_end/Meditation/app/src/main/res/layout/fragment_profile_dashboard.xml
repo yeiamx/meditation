@@ -39,12 +39,23 @@
         </LinearLayout>
     </FrameLayout>
 
-    <lecho.lib.hellocharts.view.LineChartView
-        android:id="@+id/chart"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="6dp"
-        android:layout_marginHorizontal="5dp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="380dp" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <lecho.lib.hellocharts.view.LineChartView
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="356dp"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="6dp" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

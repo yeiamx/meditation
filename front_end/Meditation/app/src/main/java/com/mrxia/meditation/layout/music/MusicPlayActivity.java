@@ -15,7 +15,9 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
+import com.mrxia.meditation.utils.ActivityUtil;
 import com.mrxia.meditation.utils.LoadingView;
 import com.squareup.picasso.Picasso;
 
@@ -45,6 +47,7 @@ public class MusicPlayActivity extends AppCompatActivity {
     private String musicPath;
     private String backgroundImgUrl;
     private String contentStr;
+    private String type;
     private LoadingView loadingView;
     private ImageView background;
     private TextView content;
@@ -64,6 +67,7 @@ public class MusicPlayActivity extends AppCompatActivity {
         musicPath = intent.getStringExtra("path");
         backgroundImgUrl = intent.getStringExtra("imgUrl");
         contentStr = intent.getStringExtra("content");
+        type = intent.getStringExtra("type");
         mediaPlayer = new MediaPlayer();
 
         initView();
@@ -76,7 +80,7 @@ public class MusicPlayActivity extends AppCompatActivity {
         background = findViewById(R.id.music_background);
         Picasso
                 .with(this)
-                .load(backgroundImgUrl)
+                .load(MyApplication.themeImageUrl)
                 .into(background);
         imagePlay = findViewById(R.id.imagePlay);
         imageNext = findViewById(R.id.imageNext);
@@ -146,7 +150,16 @@ public class MusicPlayActivity extends AppCompatActivity {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 // 在播放完毕被回调
-
+                //Log.d("mrxiaa", (type.length()-1)+"");
+                if (type!=null && type.contains("lesson")){
+                    int index = Integer.valueOf(type.substring(type.length()-1, type.length()));
+                    if (index < 6) {
+                        if (MyApplication.travelLock[index] == 0) { //actual index == index -1.So next index == index.
+                            ActivityUtil.showToast(MusicPlayActivity.this, "恭喜完成第" + index + "课" + ",解锁第" + (index + 1) + "课");
+                            MyApplication.travelLock[index] = 1;
+                        }
+                    }
+                }
             }
         });
 
@@ -263,6 +276,7 @@ public class MusicPlayActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+
     }
 
     protected void setHalfTransparent() {
@@ -279,10 +293,10 @@ public class MusicPlayActivity extends AppCompatActivity {
         }
     }
 
-    public String timeToStr(int duration){
+    public static String timeToStr(int duration){
         int musicTime = duration / 1000;
-        String mins = musicTime/60<=10?"0"+musicTime/60:""+musicTime/60;
-        String seconds = musicTime%60<=10?"0"+musicTime%60:""+musicTime%60;
+        String mins = musicTime/60<10?"0"+musicTime/60:""+musicTime/60;
+        String seconds = musicTime%60<10?"0"+musicTime%60:""+musicTime%60;
 
         return mins+":"+seconds;
     }

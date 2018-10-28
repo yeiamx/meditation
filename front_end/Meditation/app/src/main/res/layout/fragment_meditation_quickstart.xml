@@ -11,22 +11,67 @@
     android:orientation="vertical">
     <android.support.v7.widget.CardView
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         card_view:cardCornerRadius="32dp"
         android:layout_gravity="center_horizontal"
         card_view:cardBackgroundColor="@color/transparent" >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/quickstart_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="12dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="20sp"
+                android:textColor="@color/theme_blue"/>
             <ImageView
+                android:layout_below="@id/quickstart_title"
                 android:src="@mipmap/circle_play_button"
                 android:id="@+id/circle_music_button"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp" />
+                android:layout_marginTop="24dp" />
+            <SeekBar
+                android:layout_marginRight="36dp"
+                android:layout_marginLeft="36dp"
+                android:layout_below="@id/circle_music_button"
+                android:layout_marginTop="24dp"
+                android:id="@+id/quickSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:max="100" />
+            <!--显示当前进度-->
+            <TextView
+                android:id="@+id/quickCurrentText"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignTop="@id/quickSeekBar"
+                android:layout_marginLeft="6dp"
+                android:text="00:00"
+                android:textColor="#ffffff" />
+
+            <!--显示总进度-->
+            <TextView
+                android:id="@+id/quickTotalText"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/quickSeekBar"
+                android:layout_marginRight="6dp"
+                android:text="00:00"
+                android:textColor="#ffffff" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="@string/lesson1"/>
 </LinearLayout>
 </ScrollView>

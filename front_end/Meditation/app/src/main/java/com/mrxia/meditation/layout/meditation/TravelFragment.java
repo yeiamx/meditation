@@ -69,11 +69,13 @@ public class TravelFragment extends Fragment {
         recyclerView.addOnItemTouchListener(new ItemClickListener(recyclerView, new ItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                Log.d("mrxiaa", "lock:"+position);
                 if (MyApplication.travelLock[position]==1) {
                     Bundle bundle = new Bundle();
                     bundle.putString("path", data.get(position).getResUrl());
                     bundle.putString("imgUrl", data.get(position).getImgUrl());
                     bundle.putString("content", data.get(position).getContent());
+                    bundle.putString("type", "lesson"+(position+1));
                     Intent intent = new Intent();
                     //绑定需要传递的参数
                     intent.putExtras(bundle);
@@ -98,7 +100,14 @@ public class TravelFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adapter!=null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private void getLessons(){

@@ -2,6 +2,7 @@ package com.mrxia.meditation.layout.meditation;
 
 
 
+import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -11,14 +12,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
+import com.mrxia.meditation.layout.music.MusicPlayActivity;
 import com.mrxia.meditation.utils.LoadingView;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.mrxia.meditation.layout.music.MusicPlayActivity.timeToStr;
 
 public class QuickStartFragment extends Fragment {
     private ImageView circleMusicButton;
@@ -27,6 +35,14 @@ public class QuickStartFragment extends Fragment {
     private LoadingView loadingView;
     private final String musicPath = MyApplication.resUrlStarter+"/music/rainwave_4.mp3";
     private boolean isFirst = true;
+    private Timer mTimer;
+    private TimerTask mTimerTask;
+    private boolean isChanging=false;//互斥变量，防止定时器与SeekBar拖动时进度冲突
+    private SeekBar seekBar;
+    private TextView currentTimeText;   //当前时间View
+    private TextView totalTimeText;   //歌曲总时间View
+    private TextView quickTitle;
+
 
     public static QuickStartFragment newInstance() {
         QuickStartFragment frag = new QuickStartFragment();
@@ -46,6 +62,18 @@ public class QuickStartFragment extends Fragment {
         return view;
     }
 
+    public void initView(View view){
+        quickTitle = view.findViewById(R.id.quickstart_title);
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/segoe_script.ttf");
+        quickTitle.setTypeface(typeface);
+        quickTitle.setText("开始第一课");
+        seekBar = view.findViewById(R.id.quickSeekBar);
+        currentTimeText = view.findViewById(R.id.quickCurrentText);
+        totalTimeText = view.findViewById(R.id.quickTotalText);
+        circleMusicButton = view.findViewById(R.id.circle_music_button);
+        loadingView = new LoadingView(getActivity(), R.style.CustomDialog);
+    }
+
     public void registerListener(){
         circleMusicButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,9 +83,30 @@ public class QuickStartFragment extends Fragment {
         });
         mediaPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
             public void onSeekComplete(MediaPlayer m) {
+                currentTimeText.setText(timeToStr(mediaPlayer.getDuration()));
                 m.start();
                 if (loadingView!=null) {
                     loadingView.dismiss();
+                }
+            }
+        });
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                isChanging=true;
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mediaPlayer.seekTo(seekBar.getProgress());
+                isChanging=false;
+                if (loadingView!=null) {
+                    loadingView.show();
                 }
             }
         });
@@ -66,15 +115,20 @@ public class QuickStartFragment extends Fragment {
             public void onPrepared(MediaPlayer mp) {
                 // 装载完毕 开始播放流媒体
                 //Log.d("mrxiaa", "prepare over");
+                totalTimeText.setText(timeToStr(mediaPlayer.getDuration()));
+
+                mediaPlayer.start();
+                seekBar.setMax(mediaPlayer.getDuration());//设置进度条
+                setTimer();
                 if (loadingView!=null) {
                     loadingView.dismiss();
                 }
-                mediaPlayer.start();
             }
         });
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
+                // 在播放完毕被回调
 
             }
         });
@@ -89,24 +143,37 @@ public class QuickStartFragment extends Fragment {
                 return false;
             }
         });
-
     }
 
-    public void initView(View view){
-        circleMusicButton = view.findViewById(R.id.circle_music_button);
-        loadingView = new LoadingView(getActivity(), R.style.CustomDialog);
+    protected void setTimer(){
+        mTimer = new Timer();
+        mTimerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if(isChanging) {
+                    return;
+                }
+                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                    final String musicTimeStr = timeToStr(mediaPlayer.getCurrentPosition());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            currentTimeText.setText(musicTimeStr);
+                        }
+                    });
+                    seekBar.setProgress(mediaPlayer.getCurrentPosition());
+                }
+            }
+        };
+        mTimer.schedule(mTimerTask, 0, 10);
     }
+
 
     private void initData(){
 
     }
 
     protected void pause() {
-        if (isFirst){
-            isFirst = false;
-            return;
-        }
-
         if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
             mediaPlayer.start();
             //Log.d("mrxiaa", "start in QuickStart!");
