@@ -25,7 +25,21 @@ public class NotificationService {
 		return dao.listFromId(id, tableName);
 	}
 	
+	public List<Notification> getFavoriteNotifications(String favoriteStr){
+		String[] favorites = favoriteStr.split(",");
+		List<Notification> res = new ArrayList();
+		for (String id: favorites){
+			logger.info("id="+id);
+			List<Notification> noti = getNotificationById(id);
+			if (noti.size()>0){
+				res.add(noti.get(0));
+			}
+		}
+		return res;
+	}
+	
 	public List<Notification> getNotification(String type){
+
 		List<Notification> totalRes = dao.listAll(tableName);
 		List<Notification> res = new ArrayList();
 		for (Notification notification : totalRes){
@@ -33,8 +47,10 @@ public class NotificationService {
 				res.add(notification);
 			}
 		}
+		
 		return res;
 	}
+	
 	
 	public Boolean updateNotification(Notification notification){
 		return dao.saveOrUpdate(notification);

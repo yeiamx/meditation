@@ -22,11 +22,12 @@ public class NotificationTrial {
 	
 	private static final Logger logger = Logger.getLogger(Notification.class);
     public static final String resUrlStarter = "http://39.108.226.195:8080/resources";
-    public static final String urlStarter = "http://39.108.226.195:8080/meditation";
+    //public static final String urlStarter = "http://39.108.226.195:8080/meditation";
+    public static final String urlStarter = "http://localhost:8080/meditation";
     
 	public static void main(String[] args) {
 		insertLesson();
-		//insertMusic();
+		insertMusic();
 		getMusic();
 	}
 	

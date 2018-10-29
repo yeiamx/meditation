@@ -1,14 +1,22 @@
 package com.mrxia.meditation.profile;
 
 
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
+import com.mrxia.meditation.bean.Notification;
+import com.mrxia.meditation.layout.music.MusicPlayActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +24,15 @@ import java.util.List;
 public class FavoriteCardPagerAdapter extends PagerAdapter implements FavoriteCardAdapter {
 
     private List<CardView> mViews;
-    private List<FavoriteCardItem> mData;
+    private List<Notification> mData;
     private float mBaseElevation;
+    private Context context;
 
-    public FavoriteCardPagerAdapter() {
-        mData = new ArrayList<>();
+    public FavoriteCardPagerAdapter(Context context, List<Notification> mData) {
+        this.context = context;
+        this.mData = mData;
         mViews = new ArrayList<>();
-    }
-
-    public void addCardItem(FavoriteCardItem item) {
-        mViews.add(null);
-        mData.add(item);
+        for (int i=0; i<mData.size(); i++) mViews.add(null);
     }
 
     public float getBaseElevation() {
@@ -49,13 +55,27 @@ public class FavoriteCardPagerAdapter extends PagerAdapter implements FavoriteCa
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         View view = LayoutInflater.from(container.getContext())
                 .inflate(R.layout.fragment_profile_favorite_adapter,container,false);
         container.addView(view);
         bind(mData.get(position), view);
-        CardView cardView = (CardView) view.findViewById(R.id.cardView);
-
+        CardView cardView = view.findViewById(R.id.cardView);
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("path", mData.get(position).getResUrl());
+                bundle.putString("imgUrl", mData.get(position).getImgUrl());
+                bundle.putString("content", "");
+                bundle.putString("id", mData.get(position).getId());
+                Intent intent = new Intent();
+                //绑定需要传递的参数
+                intent.putExtras(bundle);
+                intent.setClass(context, MusicPlayActivity.class);
+                context.startActivity(intent);
+            }
+        });
         if (mBaseElevation == 0) {
             mBaseElevation = cardView.getCardElevation();
         }
@@ -71,11 +91,16 @@ public class FavoriteCardPagerAdapter extends PagerAdapter implements FavoriteCa
         mViews.set(position, null);
     }
 
-    private void bind(FavoriteCardItem item, View view) {
+    private void bind(Notification item, View view) {
         TextView titleTextView = (TextView) view.findViewById(R.id.titleTextView);
         TextView contentTextView = (TextView) view.findViewById(R.id.contentTextView);
+        ImageView background = view.findViewById(R.id.iv_cover);
         titleTextView.setText(item.getTitle());
-        contentTextView.setText(item.getText());
+        contentTextView.setText(item.getType());
+        Picasso
+                .with(context)
+                .load(item.getImgUrl())
+                .into(background);
     }
 
 }

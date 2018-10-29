@@ -3,39 +3,50 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout android:layout_width="fill_parent"
+    <FrameLayout
+        android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
         android:paddingVertical="20dp">
-        <LinearLayout android:layout_width="match_parent"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:paddingHorizontal="5dp">
-            <Button android:id="@+id/day_button"
+
+            <Button
+                android:id="@+id/day_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="-1dp"
                 android:layout_weight="1"
                 android:background="@drawable/left_button_selector"
-                android:textColor="@drawable/left_button_textcolor"
-                android:text="DAY" android:layout_marginRight="-1dp"/>
-            <Button android:id="@+id/week_button"
+                android:text="DAY"
+                android:textColor="@drawable/left_button_textcolor" />
+
+            <Button
+                android:id="@+id/week_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="-1dp"
                 android:layout_weight="1"
                 android:background="@drawable/center_button_selector"
-                android:textColor="@drawable/center_button_textcolor"
                 android:text="WEEK"
-                android:layout_margin="-1dp"/>
-            <Button android:id="@+id/month_button"
+                android:textColor="@drawable/center_button_textcolor" />
+
+            <Button
+                android:id="@+id/month_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="-1dp"
                 android:layout_weight="1"
                 android:background="@drawable/right_button_selector"
-                android:textColor="@drawable/right_button_textcolor"
-                android:text="MONTH" android:layout_marginLeft="-1dp"/>
+                android:text="MONTH"
+                android:textColor="@drawable/right_button_textcolor" />
         </LinearLayout>
     </FrameLayout>
 

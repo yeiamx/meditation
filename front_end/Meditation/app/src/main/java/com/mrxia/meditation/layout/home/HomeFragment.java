@@ -113,6 +113,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         bundle.putString("path", MyApplication.resUrlStarter+"/music/lesson1.mp3");
         bundle.putString("imgUrl", MyApplication.themeImageUrl);
         bundle.putString("content", getString(R.string.lesson1));
+        bundle.putString("musicId", "75124097");
         bundle.putString("type", "lesson_1");
         Intent intent = new Intent();
         //绑定需要传递的参数
@@ -121,34 +122,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         getActivity().startActivity(intent);
     }
     private void getNotification(){
-        String url = urlStarter + "/homeNotification";
-        Log.d("mrxiaa", "using url " + url);
 
-        HttpUtil.postJson_asynch(url, "{id:0}", new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.d("mrxiaa", e.getMessage());
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String resultStr = response.body().string();
-                Log.d("mrxiaa", resultStr);
-                try {
-                    final JSONArray jsonArray = JSONArray.parseArray(resultStr);
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            title_1.setText(jsonArray.getJSONObject(0).getString("title"));
-                            content_1.setText(jsonArray.getJSONObject(0).getString("content"));
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 }
 

@@ -58,10 +58,19 @@ public class GetNotificationServlet extends HttpServlet {
 		}
 		
 		String type = parameters.getString("type");
-		
-		List<Notification> notificationRes = notificationService.getNotification(type);
-		String resJsonStr= JSONArray.toJSONString(notificationRes);
-		out.print(resJsonStr);
+		String favorites;
+
+		if (type.equals("favorite")){
+			favorites = parameters.getString("favorites");
+	
+			List<Notification> notificationRes = notificationService.getFavoriteNotifications(favorites);
+			String resJsonStr= JSONArray.toJSONString(notificationRes);
+			out.print(resJsonStr);
+		}else {
+			List<Notification> notificationRes = notificationService.getNotification(type);
+			String resJsonStr= JSONArray.toJSONString(notificationRes);
+			out.print(resJsonStr);
+		}
 	}
 	private static final Logger logger = Logger.getLogger(GetNotificationServlet.class);
 }

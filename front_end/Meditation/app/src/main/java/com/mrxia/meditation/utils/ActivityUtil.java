@@ -27,5 +27,7 @@ public class ActivityUtil {
         return (int) (v + 0.5f);
     }
 
-
+    public static String[] strToIdArray(String str){
+        return str.split(",");
+    }
 }

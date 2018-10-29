@@ -58,6 +58,8 @@ public class UpdateUserInfoServlet extends HttpServlet {
 		String userId = parameters.getString("userId");
 		String userName = parameters.getString("userName");
 		String password = parameters.getString("password");
+		String favorites = parameters.getString("favorites");
+		String imgUrl = parameters.getString("imgUrl");
 		if (userId==null || userName==null || password==null){
 	      	out.print("invalid prameters");
             logger.info("invalid prameters");
@@ -65,7 +67,7 @@ public class UpdateUserInfoServlet extends HttpServlet {
             return;
 		}
 		
-		UserInfo userInfo = new UserInfo(password, userId, userName);
+		UserInfo userInfo = new UserInfo(password, userId, userName, password, favorites);
 		if (userService.updateUserInfo(userInfo)){ 
 			out.println("{status:true}");
 		}else {

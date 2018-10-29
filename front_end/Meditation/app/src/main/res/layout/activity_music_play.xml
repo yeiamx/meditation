@@ -121,12 +121,12 @@
             android:src="@mipmap/music_next" />
 
         <ImageButton
-            android:id="@+id/BtnQuit"
+            android:id="@+id/likeBtn"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_weight="1"
             android:background="@null"
-            android:src="@mipmap/sc" />
+            android:src="@mipmap/unlike" />
     </LinearLayout>
 
 </RelativeLayout>
