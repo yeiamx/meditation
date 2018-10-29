@@ -13,7 +13,8 @@ import com.mrxia.meditation.R;
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView winterButton;
     private TextView autumnButton;
-    private TextView foreastButton;
+    private TextView summerButton;
+    private TextView springButton;
     private ImageView backButton;
 
     @Override
@@ -27,14 +28,16 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     public void initView(){
         winterButton = findViewById(R.id.setting_winter);
         autumnButton = findViewById(R.id.setting_autumn);
-        foreastButton = findViewById(R.id.setting_foreast);
+        summerButton = findViewById(R.id.setting_summer);
+        springButton = findViewById(R.id.setting_spring);
         backButton = findViewById(R.id.setting_back);
     }
 
     public void registerListener(){
         winterButton.setOnClickListener(this);
         autumnButton.setOnClickListener(this);
-        foreastButton.setOnClickListener(this);
+        summerButton.setOnClickListener(this);
+        springButton.setOnClickListener(this);
         backButton.setOnClickListener(this);
     }
 
@@ -45,13 +48,20 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.setting_winter:
-                MyApplication.themeImageUrl = MyApplication.resUrlStarter+"/img/xianqi.jpg";
+                MyApplication.themeImageUrl = MyApplication.resUrlStarter+"/img/winter.jpg";
+                MyApplication.settingType = "winter";
                 break;
             case R.id.setting_autumn:
-                MyApplication.themeImageUrl = MyApplication.resUrlStarter+"/img/xianqi.jpg";
+                MyApplication.themeImageUrl = MyApplication.resUrlStarter+"/img/autumn.jpg";
+                MyApplication.settingType = "autumn";
                 break;
-            case R.id.setting_foreast:
-                MyApplication.themeImageUrl = MyApplication.resUrlStarter+"/img/xianqi.jpg";
+            case R.id.setting_spring:
+                MyApplication.themeImageUrl = MyApplication.resUrlStarter+"/img/spring.jpg";
+                MyApplication.settingType = "spring";
+                break;
+            case R.id.setting_summer:
+                MyApplication.themeImageUrl = MyApplication.resUrlStarter+"/img/summer.jpg";
+                MyApplication.settingType = "summer";
                 break;
         }
         Intent intent = new Intent();

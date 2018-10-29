@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.layout.LoginActivity;
+import com.mrxia.meditation.layout.music.MusicPlayActivity;
 import com.mrxia.meditation.utils.HttpUtil;
 import com.squareup.picasso.Picasso;
 
@@ -100,13 +101,25 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if (isLogin) {
-            getNotification();
+            //getNotification();
+            toFirstLesson();
         } else {
             Intent intent=new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
         }
     }
-
+    private void toFirstLesson(){
+        Bundle bundle = new Bundle();
+        bundle.putString("path", MyApplication.resUrlStarter+"/music/lesson1.mp3");
+        bundle.putString("imgUrl", MyApplication.themeImageUrl);
+        bundle.putString("content", getString(R.string.lesson1));
+        bundle.putString("type", "lesson_1");
+        Intent intent = new Intent();
+        //绑定需要传递的参数
+        intent.putExtras(bundle);
+        intent.setClass(getActivity(), MusicPlayActivity.class);
+        getActivity().startActivity(intent);
+    }
     private void getNotification(){
         String url = urlStarter + "/homeNotification";
         Log.d("mrxiaa", "using url " + url);

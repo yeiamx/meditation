@@ -7,7 +7,14 @@
     <param-name>webmaster</param-name>
     <param-value>925166340@qq.com</param-value>
   </context-param>
-  
+  <servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>com.flctxx.meditation.servlet.RegisterServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>UpdateNotificationServlet</servlet-name>
     <servlet-class>com.flctxx.meditation.servlet.UpdateNotificationServlet</servlet-class>
@@ -16,7 +23,6 @@
     <servlet-name>UpdateNotificationServlet</servlet-name>
     <url-pattern>/updateNotification</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>GetNotificationServlet</servlet-name>
     <servlet-class>com.flctxx.meditation.servlet.GetNotificationServlet</servlet-class>

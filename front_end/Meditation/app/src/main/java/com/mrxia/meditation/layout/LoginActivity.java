@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
+import com.mrxia.meditation.bean.UserInfo;
 import com.mrxia.meditation.utils.ActivityUtil;
 
 import com.alibaba.fastjson.JSON;
@@ -78,6 +79,8 @@ public class LoginActivity extends AppCompatActivity {
             ActivityUtil.showToast(LoginActivity.this, "请输入用户名和密码");
         } else if (userName.equals("admin") && password.equals("admin")){
             ActivityUtil.showToast(LoginActivity.this, "登录成功");
+            UserInfo userInfo = new UserInfo();
+            MyApplication.userInfo = userInfo;
             MyApplication.isLogin = true;
             finish();
         } else {
@@ -111,9 +114,10 @@ public class LoginActivity extends AppCompatActivity {
                         LoginActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (resJsonObj.getString("status").equals("true")){
+                                if (!resJsonObj.containsKey("status")){
                                     ActivityUtil.showToast(LoginActivity.this, "登录成功");
                                     MyApplication.isLogin = true;
+                                    MyApplication.userInfo = JSONObject.parseObject(resultStr, UserInfo.class);
                                     finish();
                                 } else {
                                     LoginActivity.this.runOnUiThread(new Runnable() {

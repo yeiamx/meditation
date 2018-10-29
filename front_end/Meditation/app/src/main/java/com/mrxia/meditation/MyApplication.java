@@ -3,6 +3,7 @@ package com.mrxia.meditation;
 import android.app.Application;
 import android.graphics.Bitmap;
 
+import com.mrxia.meditation.bean.UserInfo;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -19,6 +20,8 @@ public class MyApplication extends Application {
     public static DisplayImageOptions options;
     public static String themeImageUrl;
     public static int SETTING = 666;
+    public static UserInfo userInfo;
+    public static String settingType;
 
     public static int[] travelLock = new int[7];
     @Override

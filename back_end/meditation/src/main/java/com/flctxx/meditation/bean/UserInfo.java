@@ -17,6 +17,26 @@ public class UserInfo {
 
 	@Column(name = "user_name")
 	private String userName;
+	
+	@Column(name="favorite")
+	private String favorite;
+	
+	@Column(name="img_url")
+	private String imgUrl;
+	
+	
+	public String getFavorite() {
+		return favorite;
+	}
+	public void setFavorite(String favorite) {
+		this.favorite = favorite;
+	}
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -40,6 +60,14 @@ public class UserInfo {
 		this.password = password;
 		this.userId = userId;
 		this.userName = userName;
+	}
+	public UserInfo(String password, String userId, String userName, String imgUrl, String favorite) {
+		super();
+		this.password = password;
+		this.userId = userId;
+		this.userName = userName;
+		this.imgUrl = imgUrl;
+		this.favorite = favorite;
 	}
 	
 	public UserInfo(){

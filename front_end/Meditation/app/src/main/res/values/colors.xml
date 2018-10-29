@@ -17,4 +17,8 @@
     <color name="white">#FFFFFF</color>
     <color name="darkpurple">#4f2468</color>
     <color name="shallowpurple">#dabdeb</color>
+    <color name="spring">#70d15f</color>
+    <color name="summer">#9aca0d</color>
+    <color name="autumn">#de8028</color>
+    <color name="winter">#817b7b</color>
 </resources>

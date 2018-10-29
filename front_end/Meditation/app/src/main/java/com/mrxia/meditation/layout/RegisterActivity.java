@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         String userName = userNameET.getText().toString();
         String password = passwordET.getText().toString();
         String confirmPassword = confirmPasswordET.getText().toString();
-        String url = urlStarter + "/updateUserInfo";
+        String url = urlStarter + "/register";
 
         if (userName.equals("")||password.equals("")||userId.equals("")){
             ActivityUtil.showToast(RegisterActivity.this, "请输入注册信息");

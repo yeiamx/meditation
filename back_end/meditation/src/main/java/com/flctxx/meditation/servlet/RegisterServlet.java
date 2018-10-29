@@ -18,16 +18,15 @@ import com.flctxx.meditation.service.UserService;
 import com.flctxx.meditation.utils.NetworkUtility;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class RegisterServlet
  */
-
-public class LoginServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private UserService service = new UserService();
+	private UserService userService = new UserService();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public RegisterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,28 +48,29 @@ public class LoginServlet extends HttpServlet {
 		String jsonString = NetworkUtility.exhaustBufferedReader(request.getReader());
 		JSONObject parameters = JSON.parseObject(jsonString);
 		if (parameters==null) {
-			out.print("didnt pass correct json string");
-			logger.info("didnt get correct json string");
-			return;
+	      	 out.print("didnt pass correct json string");
+           logger.info("didnt get correct json string");
+           response.setStatus(400);
+           return;
 		}
 		
+		String userId = parameters.getString("userId");
 		String userName = parameters.getString("userName");
 		String password = parameters.getString("password");
-		if (userName==null || password==null){
+		if (userId==null || userName==null || password==null){
 	      	out.print("invalid prameters");
             logger.info("invalid prameters");
+            response.setStatus(400);
             return;
 		}
 		
-		UserInfo result = service.login(userName, password);
-		if (result!=null){
-			logger.info("register successful!");
-			String resJsonStr= JSONObject.toJSONString(result);
-			out.println(resJsonStr);
+		Boolean status = userService.register(password, userId, userName);
+		if (status){
+			out.print("{status:true}");
 		}else {
 			out.print("{status:false}");
+            logger.info("register failed");
 		}
 	}
-	
-	private static final Logger logger = Logger.getLogger(LoginServlet.class);
+	private static final Logger logger = Logger.getLogger(RegisterServlet.class);
 }

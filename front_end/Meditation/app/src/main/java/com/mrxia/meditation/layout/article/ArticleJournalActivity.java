@@ -19,8 +19,11 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.mrxia.meditation.MyApplication;
 import com.mrxia.meditation.R;
 import com.mrxia.meditation.bean.Notification;
+import com.mrxia.meditation.layout.LoginActivity;
+import com.mrxia.meditation.utils.ActivityUtil;
 import com.mrxia.meditation.utils.HttpUtil;
 import com.mrxia.meditation.utils.LoadingView;
 
@@ -81,6 +84,10 @@ public class ArticleJournalActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(TextUtils.isEmpty(et.getText())){
                     Toast.makeText(ArticleJournalActivity.this,"请输入日志内容", Toast.LENGTH_SHORT).show();
+                }else if (!MyApplication.isLogin){
+                    ActivityUtil.showToast(ArticleJournalActivity.this, "请先登录再发表哦");
+                    Intent intent=new Intent(ArticleJournalActivity.this, LoginActivity.class);
+                    startActivity(intent);
                 }else{
                     if (loadingView!=null){
                         loadingView.show();
@@ -106,9 +113,10 @@ public class ArticleJournalActivity extends AppCompatActivity {
         final Notification notification = new Notification();
         String id = "" + ran.nextInt();
         notification.setId(id);
-        notification.setTitle("wo");
+        notification.setTitle(MyApplication.userInfo.getUserName());
         notification.setContent(newJournal);
         notification.setType("journal_test");
+        notification.setImgUrl(MyApplication.userInfo.getImgUrl());
         long time=System.currentTimeMillis();//long now = android.os.SystemClock.uptimeMillis();
         SimpleDateFormat format=new SimpleDateFormat("yyyy/M/d");
         Date d1=new Date(time);
@@ -140,7 +148,6 @@ public class ArticleJournalActivity extends AppCompatActivity {
 
                 Intent intent = new Intent();
                 intent.putExtra("newJournal", notification);
-
 
                 setResult(4, intent);
                 finish();

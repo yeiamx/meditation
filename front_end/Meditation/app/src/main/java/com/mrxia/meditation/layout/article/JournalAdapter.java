@@ -38,7 +38,6 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
 
     @Override
     public void onBindViewHolder(JournalAdapter.JournalViewHolder holder, final int position) {
-       // holder.userHead.setImageResource(mDataList.get(position).getUserHead());
         holder.userName.setText(mDataList.get(position).getTitle());
         holder.time.setText(mDataList.get(position).getTime());
         holder.content.setText(mDataList.get(position).getContent());
@@ -86,7 +85,6 @@ public class JournalAdapter extends RecyclerView.Adapter<JournalAdapter.JournalV
             userName = itemView.findViewById(R.id.article_journal_item_username);
             time = itemView.findViewById(R.id.article_journal_item_time);
             content = itemView.findViewById(R.id.article_journal_item_content);
-
         }
     }
 }
