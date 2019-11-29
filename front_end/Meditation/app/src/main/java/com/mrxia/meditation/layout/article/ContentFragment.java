@@ -105,7 +105,7 @@ public class ContentFragment extends Fragment {
                     loadingView.dismiss();
 
                 for (int i=0; i<20; i++){
-                    int num = i%3;
+                    int num = i%articles.size();
                     mDataList.add(articles.get(num));
                 }
                 mAdapter = new ContentAdapter(getActivity(), mDataList);

@@ -113,7 +113,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         bundle.putString("path", MyApplication.resUrlStarter+"/music/lesson1.mp3");
         bundle.putString("imgUrl", MyApplication.themeImageUrl);
         bundle.putString("content", getString(R.string.lesson1));
-        bundle.putString("musicId", "75124097");
+        bundle.putString("id", "75124097");
         bundle.putString("type", "lesson_1");
         Intent intent = new Intent();
         //绑定需要传递的参数
